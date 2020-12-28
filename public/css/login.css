@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@200;300;400;700&display=swap');
+body{
+    font-family: 'Source Serif Pro', serif;
+}
+a{
+    color: #43BCAC;
+}
+a:hover{
+    color: #157669;
+}
+.s-btn-primary{
+    background-color: #43BCAC;
+    color: white;
+}
+.s-btn-primary:hover{
+    background-color: #1daa97;
+    color: white;
+}
+.s-bg-primary{
+    background-color: #43BCAC;
+}
+.main-wrapper{
+    height: 100vh;
+}
+.s-bg-main{
+    background-color: #F7F8FA;
+}
+.s-main-text{
+    color: #464646;
+}
+.main-wrapper .left-wrapper{
+    padding: 69px 59px;
+    color: white;
+    background-image: url('../images/Frame_24.png');
+    background-position: bottom center;
+    background-repeat: no-repeat;
+}
+.main-wrapper .right-wrapper{
+    padding: 69px 59px;
+    position: relative;
+}
+.main-wrapper .left-wrapper h1{
+    font-weight: bold;
+    font-size: 3.5em;
+}
+.main-brand{
+    margin-bottom: 125px;
+}
+.main-brand img{
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+.main-brand .brand-text{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-left: 18px;
+}
+.right-wrapper .main-title p{
+    font-weight: 200;
+}
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #a1efb4;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(67 188 172 / 29%);
+}
+input[type="checkbox"] {
+    visibility: hidden;
+}
+label {
+    cursor: pointer;
+}
+input[type="checkbox"] + label:before {
+    border: 1px solid #43bcac;
+    content: "\00a0";
+    display: inline-block;
+    font: 16px/1em sans-serif;
+    height: 16px;
+    margin: 0 .25em 0 0;
+    padding: 0;
+    vertical-align: middle;
+    width: 16px;
+    border-radius: 3px;
+}
+input[type="checkbox"]:checked + label:before {
+    background: #43bcac;
+    color: #fdfefe;
+    content: "\2713";
+    text-align: center;
+}
+input[type="checkbox"]:checked + label:after {
+    font-weight: bold;
+}
+
+input[type="checkbox"]:focus + label::before {
+    outline: rgb(59, 153, 252) auto 5px;
+}
+.form-check-input {
+    position: relative;
+    margin-top: 0.3rem;
+    margin-left: -2.25rem;
+}
+.footer{
+    bottom:0;
+    margin: 0px -59px;
+}
+.footer p{
+    font-weight: 200;
+}
