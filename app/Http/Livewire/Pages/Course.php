@@ -8,13 +8,14 @@ use App\Models\Classes;
 use App\Models\GeneralSetting;
 use App\Models\KKM;
 use App\Models\KompetensiDasar;
+use App\Models\LastCourse;
 use App\Models\Message;
 use App\Models\Nilai;
 use App\Models\Semester;
 use App\Models\StudentClass;
 use App\Models\TahunAjaran;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+
 
 class Course extends Component
 {
@@ -65,6 +66,7 @@ class Course extends Component
     }
     public function mount($kode = null)
     {
+
         $this->course_code = $kode;
         $this->getAllCourses();
         if (empty($this->courses)) {
@@ -82,6 +84,13 @@ class Course extends Component
         $this->getCourse();
         $setting_semester = GeneralSetting::select('setting_value')->where('setting_name', 'semester_aktif')->first();
         $this->selected_semester = ($setting_semester) ? $setting_semester->setting_value : 1;
+        if ($this->course) {
+            LastCourse::insert([
+                'teacher_course_id' => $this->course->id,
+                'teacher_id' => Auth::user()->id,
+                'created_at' => \Carbon\Carbon::now(),
+            ]);
+        }
     }
 
     private function getCourse()
@@ -92,30 +101,27 @@ class Course extends Component
     }
     private function getAllCourses($tahun = null)
     {
+        if ($tahun == null) {
+            $t = GeneralSetting::where('setting_name', 'tahun_ajaran_aktif')->first();
+            $tahun = ($t) ? $t->setting_value : "all";
+            $this->tahun = $t->setting_value;
+        }
+
         if (Auth::user()->role_id <= 2) {
-            $this->courses = TeacherCourse::select('course_id', 'tahun_ajaran_id')
-                ->whereHas('course', function ($query) {
-                    return $query->where('is_active', 1);
-                })->whereHas('tahun_ajaran', function ($query) use ($tahun) {
-                    if ($tahun == null) {
-                        $t = GeneralSetting::where('setting_name', 'tahun_ajaran_aktif')->first();
-                        $tahun = ($t) ? $t->id : "all";
-                    }
-                    return ($tahun != null && $tahun != "all") ? $query->where('tahun_ajaran.id', $tahun) : $query->where('id', '>', 0);
-                })->with('course')->get()->groupBy('course_id')->toArray();
+            $this->courses = TeacherCourse::whereHas('course', function ($query) {
+                return $query->where('is_active', 1);
+            });
         } else {
-            $this->courses = TeacherCourse::select('course_id', 'tahun_ajaran_id')->whereHas('course', function ($query) {
+            $this->courses = TeacherCourse::whereHas('course', function ($query) {
                 return $query->where('is_active', 1);
             })->whereHas('user', function ($query) {
                 return $query->where('id', Auth::user()->id);
-            })->whereHas('tahun_ajaran', function ($query) use ($tahun) {
-                if ($tahun == null) {
-                    $t = GeneralSetting::where('setting_name', 'tahun_ajaran_aktif')->first();
-                    $tahun = ($t) ? $t->id : "all";
-                }
-                return ($tahun != null && $tahun != "all") ? $query->where('tahun_ajaran.id', $tahun) : $query->where('id', '>', 0);
-            })->with('course')->get()->groupBy('course_id')->toArray();
+            });
         }
+        if ($tahun != null && $tahun != "all") {
+            $this->courses = $this->courses->where('tahun_ajaran_id', $tahun);
+        }
+        $this->courses = $this->courses->with('course')->get()->groupBy('course_id')->toArray();
     }
     public function getTahunId()
     {
@@ -133,7 +139,7 @@ class Course extends Component
         foreach ($this->courses as $course) {
             $this->menu['_menus'][0][] = [
                 "_text" => ucfirst($course[0]['course']['name']),
-                "_link" => "/courses/" . $course[0]['course']['kode'],
+                "_link" => "/courses/" . $course[0]['course']['kode'] . "/0/" . str_replace('/', '-', $this->tahun_name),
             ];
         }
         $this->emitTo('partials.menu', 'getNewMenu', $this->menu);
@@ -251,6 +257,10 @@ class Course extends Component
             }
         }
         $this->validation_errors = [];
+    }
+    public function getTahunName($tahun_id)
+    {
+        return TahunAjaran::find($tahun_id)->tahun_ajaran;
     }
 
     public function render()

@@ -2,7 +2,7 @@
     <input
         x-ref="input"
         type="text"
-        class="m-1 text-sm leading-4 flex-grow form-input "
+        class="m-1 text-sm leading-4 flex-grow form-input p-1"
         wire:change="doTextFilter('{{ $index }}', $event.target.value)"
         x-on:change="$refs.input.value = ''"
     />

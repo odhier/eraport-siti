@@ -28,5 +28,9 @@ class TeacherCourse extends Model
     {
         return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id', 'id');
     }
+    public function last_course()
+    {
+        return $this->hasMany(LastCourse::class, 'teacher_course_id', 'id');
+    }
     protected $table = 'teacher_course';
 }

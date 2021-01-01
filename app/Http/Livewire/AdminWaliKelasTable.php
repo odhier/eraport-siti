@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\TahunAjaran;
 use App\Models\WaliKelas;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Mediconesystems\LivewireDatatables\Column;
@@ -11,7 +12,6 @@ class AdminWaliKelasTable extends LivewireDatatable
 {
     public $model = WaliKelas::class;
     protected $listeners = ['confirmDelete', '_delete', 'successMessage', 'errorMessage', 'editForm'];
-
     public $addable = true;
     public $_id;
 
@@ -23,6 +23,7 @@ class AdminWaliKelasTable extends LivewireDatatable
     }
     public function columns()
     {
+        $tahun_ajaran = TahunAjaran::pluck('tahun_ajaran')->toArray();
         return [
 
             NumberColumn::name('wali_kelas.id')
@@ -30,9 +31,9 @@ class AdminWaliKelasTable extends LivewireDatatable
                 ->sortBy('wali_kelas.id'),
             Column::callback(['classes.tingkat', 'classes.name'], function ($tingkat, $name) {
                 return $tingkat . " (" . $name . ")";
-            })->label('Kelas'),
-            Column::name('users.name')->label('Wali Kelas'),
-            Column::name('tahun_ajaran.tahun_ajaran')->label('Tahun Ajaran'),
+            })->label('Kelas')->filterable(),
+            Column::name('users.name')->label('Wali Kelas')->filterable(),
+            Column::name('tahun_ajaran.tahun_ajaran')->label('Tahun Ajaran')->filterable($tahun_ajaran),
             Column::callback(['id'], function ($id) {
                 return view('livewire.datatables.table-actions-noview', ['id' => $id]);
             })->label('Actions')

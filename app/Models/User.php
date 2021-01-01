@@ -57,4 +57,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(WaliKelas::class, 'teacher_id', 'id');
     }
+    public function last_course()
+    {
+        return $this->hasMany(LastCourse::class, 'teacher_id', 'id');
+    }
 }

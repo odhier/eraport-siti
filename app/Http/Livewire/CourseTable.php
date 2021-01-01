@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\GeneralSetting;
+
 use App\Models\TeacherCourse;
 use App\Models\Walikelas;
 use App\Models\StudentClass;
@@ -48,6 +48,7 @@ class CourseTable extends LivewireDatatable
     }
     private function classTable()
     {
+
         return [
             NumberColumn::name('teacher_course.id')
                 ->label('ID')
@@ -94,10 +95,11 @@ class CourseTable extends LivewireDatatable
     }
     private function classBuilder()
     {
-        return $this->model::query()->leftJoin('users', 'users.id', 'teacher_course.teacher_id')
+        $table = $this->model::query()->leftJoin('users', 'users.id', 'teacher_course.teacher_id')
             ->leftJoin('courses', 'courses.id', 'teacher_course.course_id')
             ->leftJoin('classes', 'classes.id', 'teacher_course.class_id')
             ->leftJoin('tahun_ajaran', 'tahun_ajaran.id', 'teacher_course.tahun_ajaran_id')->where('courses.kode', $this->kode)->where('teacher_course.teacher_id', Auth::user()->id);
+        return ($this->tahun) ? $table->where('tahun_ajaran_id', $this->tahun->id) : $table;
     }
     private function studentClassBuilder()
     {
