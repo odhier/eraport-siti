@@ -15,6 +15,8 @@ class CreateKompetensiIntiTable extends Migration
     {
         Schema::create('kompetensi_inti', function (Blueprint $table) {
             $table->id();
+            $table->integer('kode');
+            $table->string('name');
             $table->timestamps();
         });
     }
