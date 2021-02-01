@@ -7,7 +7,6 @@ use App\Models\KompetensiDasar;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\NumberColumn;
-use Mediconesystems\LivewireDatatables\BooleanColumn;
 
 class AdminKompetensiDasarTable extends LivewireDatatable
 {

@@ -61,4 +61,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(LastCourse::class, 'teacher_id', 'id');
     }
+    public function nilai_ki()
+    {
+        return $this->hasMany(NilaiKI::class, 'teacher_id', 'id');
+    }
+    public function message_ki()
+    {
+        return $this->hasMany(MessageKI::class, 'teacher_id', 'id');
+    }
 }

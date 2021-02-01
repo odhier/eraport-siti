@@ -25,7 +25,7 @@
                         <div class="d-flex flex-row space-x-3 mb-3">
                             <input type="hidden" wire:model="all_ki.{{$index}}.id">
                             <span class="col-form-label">{{$index+1}}.</span>
-                            <input type="text" class="form-control col-10" id="inputKi-{{$index+1}}" wire:model="all_ki.{{$index}}.kompetensi" wire:keydown.enter="addKD">
+                            <input type="text" class="form-control col-10" id="inputKi-{{$index+1}}" wire:model="all_ki.{{$index}}.kompetensi" wire:keydown.enter="addKI">
                             @if(count($all_ki) > 1)
                             <a wire:click="removeKI({{$index}}, {{(isset($all_ki[$index]['id']))?$all_ki[$index]['id']:0}})" class="p-1 text-red-600 hover:text-red-800 rounded">
                                 <i class="fas fa-times"></i>

@@ -10,7 +10,7 @@
                 @if($course_code == null)
                     <h2>{{__('Silahkan Pilih Mata Pelajaran')}}</h2>
                 @else
-                    <h2>Mohon maaf mata pelajaran tidak ditemukan</h2><small>Silahkan hubungi admin </small>
+                    <h2>{{__('Mohon maaf mata pelajaran tidak ditemukan')}}</h2><span>Silahkan hubungi admin</span>
                 @endif
             @else
             <h2>{{strtoupper($course['course']['name'])}}</h2>
@@ -20,8 +20,8 @@
 
             @include("livewire.partials.modals.admin.edit-nilai")
 
+            @endif
         </div>
-        @endif
         <footer class="w-100">
             <livewire:partials.footer>
         </footer>

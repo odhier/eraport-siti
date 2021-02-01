@@ -80,6 +80,7 @@ class Course extends Component
         }
         $this->class = ($this->class_id) ? Classes::where('id', $this->class_id)->first() : null;
         $this->class_name = ($this->class) ? "Kelas " . $this->class->tingkat . " (" . $this->class->name . ")" : "";
+
         $this->tahun = ($this->tahun_name) ? $this->getTahunId() : null;
         $this->getCourse();
         $setting_semester = GeneralSetting::select('setting_value')->where('setting_name', 'semester_aktif')->first();
@@ -202,6 +203,7 @@ class Course extends Component
     public function save()
     {
         try {
+            $this->deskripsi['deskripsi'] = (isset($this->deskripsi['deskripsi'])) ? $this->deskripsi['deskripsi'] : "";
             $query_deskripsi = [
                 'student_class_id' => $this->student_class['id'],
                 'teacher_course_id' => $this->course->id,
@@ -209,15 +211,17 @@ class Course extends Component
                 'deskripsi' => $this->deskripsi['deskripsi'],
                 'ki' => $this->current_ki,
             ];
-            if ($this->deskripsi) {
+            if (isset($this->deskripsi['id'])) {
                 $query_deskripsi["updated_at"] = \Carbon\Carbon::now();
                 Message::where('id', $this->deskripsi['id'])
                     ->update($query_deskripsi);
             } else {
+
                 $query_deskripsi["created_at"] = \Carbon\Carbon::now();
                 Message::insert($query_deskripsi);
             }
         } catch (\Exception $e) {
+
             $this->dispatchBrowserEvent('closeModal');
             return $this->emitTo('course-table', 'errorMessage', 'Gagal menyimpan data');
         }

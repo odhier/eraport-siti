@@ -55,7 +55,7 @@
 
             </div>
 
-            <div class="col right-wrapper s-main-text h-100 " data-turbolinks-eval=“false”>
+            <div class="col-10 right-wrapper s-main-text h-100 " data-turbolinks-eval=“false”>
 
 
                 {{ $slot }}

@@ -42,6 +42,7 @@
 
                             @if(!$errors->has('kds.*.*'))
                             @foreach($kds as $index => $kd)
+
                             @php $nilai_akhir += (
                                 (
                                 (($kd['NH']!=""?$kd['NH']:0)*2) + ($kd['NUTS']!=""?$kd['NUTS']:0) + ($kd['NUAS']!=""?$kd['NUAS']:0)
@@ -49,8 +50,10 @@
                                 )
                             @endphp
                             @endforeach
+
                             @php
-                            $nilai_akhir = $nilai_akhir/2;
+                            $nilai_akhir = $nilai_akhir?round($nilai_akhir/count($kds),2):0;
+
                             $nilai_akhir_r = round($nilai_akhir);
                             $predikat = ($nilai_akhir_r>=93)?"A":(($nilai_akhir_r>=86)?"B":(($nilai_akhir_r>=80)?"C":"D"));
                             @endphp

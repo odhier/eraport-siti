@@ -15,9 +15,9 @@ class Message extends Model
     {
         return $this->belongsTo(Course::class, 'course_id', 'id');
     }
-    public function teacher()
+    public function teacher_course()
     {
-        return $this->belongsTo(User::class, 'teacher_id', 'id');
+        return $this->belongsTo(TeacherCourse::class, 'teacher_course_id', 'id');
     }
     public function tahun_ajaran()
     {

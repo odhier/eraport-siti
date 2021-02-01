@@ -34,7 +34,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="inputState">Tahun Ajaran<span class="text-danger">*</span></label>
-                                <select id="inputState" class="form-control" wire:model="teacher_course.tahun_ajaran_id">
+                                <select id="inputState" class="form-control" wire:model="wali_kelas.tahun_ajaran_id">
                                     <option value="" selected>Pilih Tahun Ajaran</option>
                                     @foreach ($allTahun as $tahun)
                                     <option value="{{$tahun['id']}}" wire:key="{{$tahun['id']}}">{{$tahun['tahun_ajaran']}}</option>

@@ -15,4 +15,8 @@ class KompetensiIntiDetail extends Model
     {
         return $this->belongsTo(KompetensiInti::class, 'ki_id', 'id');
     }
+    public function nilai_ki()
+    {
+        return $this->hasMany(NilaiKI::class, 'ki_detail_id', 'id');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\StudentClass;
+use App\Models\TahunAjaran;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\NumberColumn;
@@ -23,6 +24,7 @@ class AdminStudentClassTable extends LivewireDatatable
     }
     public function columns()
     {
+        $tahun_ajaran = TahunAjaran::pluck('tahun_ajaran')->toArray();
         return [
             // Column::checkbox(),
             NumberColumn::name('student_class.id')
@@ -32,9 +34,9 @@ class AdminStudentClassTable extends LivewireDatatable
             Column::name('students.name')->label('Nama Siswa'),
             Column::callback(['classes.tingkat', 'classes.name'], function ($tingkat, $name) {
                 return $tingkat . " (" . $name . ")";
-            })->label('Kelas'),
+            })->label('Kelas')->filterable(),
 
-            Column::name('tahun_ajaran.tahun_ajaran')->label('Tahun Ajaran'),
+            Column::name('tahun_ajaran.tahun_ajaran')->label('Tahun Ajaran')->filterable($tahun_ajaran),
             Column::callback(['id'], function ($id) {
                 return view('livewire.datatables.table-actions-noview', ['id' => $id]);
             })->label('Actions')

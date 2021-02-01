@@ -21,6 +21,7 @@ class NavAdmin
                 ["_text" => "Kelas Siswa", "_route" => 'admin-kelas-siswa'],
                 ["_text" => "Guru Mata Pelajaran", "_route" => 'admin-teacher-course'],
                 ["_text" => "Wali Kelas", "_route" => 'admin-wali-kelas'],
+                ["_text" => "Kompetensi Inti", "_route" => 'admin-kompetensi-inti'],
                 ["_text" => "Kompetensi Dasar & KKM", "_route" => 'admin-kompetensi-dasar'],
             ],
         ],

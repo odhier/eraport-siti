@@ -18,4 +18,8 @@ class Classes extends Model
     {
         return $this->hasMany(StudentClass::class, 'class_id', 'id');
     }
+    public function wali_kelas()
+    {
+        return $this->hasMany(WaliKelas::class, 'class_id', 'id');
+    }
 }

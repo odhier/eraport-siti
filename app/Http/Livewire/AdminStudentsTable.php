@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Absensi;
 use App\Models\Student;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Mediconesystems\LivewireDatatables\Column;
@@ -54,6 +55,7 @@ class AdminStudentsTable extends LivewireDatatable
             })->label('Actions')
         ];
     }
+
     public function confirmDelete($id)
     {
         $this->_id = $id;

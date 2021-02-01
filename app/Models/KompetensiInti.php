@@ -13,4 +13,8 @@ class KompetensiInti extends Model
     {
         return $this->hasMany(KompetensiIntiDetail::class, 'ki_id', 'id');
     }
+    public function message_ki()
+    {
+        return $this->hasMany(MessageKI::class, 'ki_id', 'id');
+    }
 }

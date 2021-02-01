@@ -29,4 +29,26 @@ class StudentClass extends Model
     {
         return $this->hasMany(Message::class, 'student_class_id', 'id');
     }
+    public function saran()
+    {
+        return $this->hasMany(Saran::class, 'student_class_id', 'id');
+    }
+    public function absensi()
+    {
+        return $this->hasMany(Absensi::class, 'student_class_id', 'id');
+    }
+    public function scopeSelectGroupedWeaponNames($query, $alias)
+    {
+        $query->addSelect([
+            $alias => Absensi::select('absensi.sakit')->where('absensi.semester', 1)->whereColumn('absensi.student_class_id', 'student_class.id')
+        ]);
+    }
+    public function nilai_ki()
+    {
+        return $this->hasMany(NilaiKI::class, 'student_class_id', 'id');
+    }
+    public function message_ki()
+    {
+        return $this->hasMany(MessageKI::class, 'student_class_id', 'id');
+    }
 }

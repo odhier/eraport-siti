@@ -11,8 +11,8 @@
     <li class="{{ Request::is('courses*') ? 'active' : '' }}">
         <a href="{{route('courses')}}"><span class="fa fa-book"></span> {{ __('Courses') }}</a>
     </li>
-    <li class="{{ Request::is('classes*') ? 'active' : '' }}">
-        <a href="{{route('courses')}}"><span class="fas fa-chalkboard-teacher"></span> {{ __('Classes') }}</a>
+    <li class="{{ Request::is('class*') ? 'active' : '' }}">
+        <a href="{{route('class')}}"><span class="fas fa-chalkboard-teacher"></span> {{ __('Classes') }}</a>
     </li>
     {{-- <li class="{{ Request::is('chats*') ? 'active' : '' }}">
         <a href="{{route('courses')}}"><span class="fa fa-comment-alt"></span> {{ __('Chats') }}</a>

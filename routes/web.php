@@ -25,7 +25,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', App\Http\Livewire\Pages\Dashboard::class)->name('dashboard');
     //course
     Route::get('/courses/{kode?}/{class_id?}/{tahun_name?}', App\Http\Livewire\Pages\Course::class)->name('courses');
+    Route::get('/class/{tahun_id?}/{class_id?}', App\Http\Livewire\Pages\Classes::class)->name('class');
+    Route::get('/class/{tahun_id?}/{class_id?}/{semester?}/{student_class_id?}', App\Http\Livewire\Pages\DetailNilai::class)->name('class-student');
 
+    Route::get('/raport/cetak_pdf/{tahun_id}_{class_id}_{semester}_{student_class_id}', ['uses' => 'App\Http\Controllers\PDFController@download']);
 
     Route::get('/users/edit/{id}', [App\Http\Livewire\UsersTable::class, "edit"])->name('users.edit');
 
@@ -37,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/kelas_siswa', App\Http\Livewire\Pages\AdminStudentClass::class)->name('admin-kelas-siswa');
     Route::get('/admin/teacher_course', App\Http\Livewire\Pages\AdminTeacherCourse::class)->name('admin-teacher-course');
     Route::get('/admin/wali_kelas', App\Http\Livewire\Pages\AdminWaliKelas::class)->name('admin-wali-kelas');
+    Route::get('/admin/kompetensi_inti', App\Http\Livewire\Pages\AdminKompetensiInti::class)->name('admin-kompetensi-inti');
     Route::get('/admin/kompetensi_dasar', App\Http\Livewire\Pages\AdminKompetensiDasar::class)->name('admin-kompetensi-dasar');
     Route::get('/admin', App\Http\Livewire\Pages\AdminGeneral::class)->name('admin-setting');
 });

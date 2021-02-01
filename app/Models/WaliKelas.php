@@ -15,4 +15,12 @@ class WaliKelas extends Model
     {
         return $this->belongsTo(User::class, 'teacher_id', 'id');
     }
+    public function class()
+    {
+        return $this->belongsTo(Classes::class, 'class_id', 'id');
+    }
+    public function tahun_ajaran()
+    {
+        return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id', 'id');
+    }
 }
