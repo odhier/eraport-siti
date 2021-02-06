@@ -54,8 +54,7 @@ class UsersTable extends LivewireDatatable
     }
     public function editForm($id)
     {
-        $user = User::find($id)->toArray();
-        $this->emitUp('handleFormEdit', $user);
+        $this->emitUp('editForm', $id);
     }
     public function viewForm($id)
     {
