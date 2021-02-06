@@ -7,10 +7,22 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" wire:loading>
+                <h5 class="animate-bounce">Loading Data...</h5>
+                <div class="animate-pulse flex space-x-4">
+
+                    <div class="flex-1 space-y-4 py-1">
+                      <div class="h-4 bg-gray-400 rounded w-3/4"></div>
+                      <div class="space-y-2">
+                        <div class="h-4 bg-gray-400 rounded"></div>
+                        <div class="h-4 bg-gray-400 rounded w-5/6"></div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="modal-body" wire:loading.remove>
 
                 <form wire:submit.prevent="update">
-                    <input type="text" >
                     <div class="row">
 
                         <div class="col-12">
@@ -136,7 +148,10 @@
 
                     <div class="col-12 text-right ">
                         <button wire:click="emptyUserForm" data-dismiss="modal" id="close-btn-modal" class="btn btn-default my-3">Cancel</button>
-                        <button type="button" wire:click="_update" class="btn s-btn-primary my-3 btn-modal-save">Submit</button>
+                        <div wire:target="_update" wire:loading >
+                            <button type="button" class="btn s-btn-primary my-3 btn-modal-save" disabled>Saving...</button>
+                        </div>
+                        <button type="button" wire:target="_update" wire:click="_update" class="btn s-btn-primary my-3 btn-modal-save" wire:loading.remove>Submit</button>
 
 
                     </div>

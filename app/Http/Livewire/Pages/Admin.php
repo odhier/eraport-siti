@@ -13,10 +13,11 @@ use App\Models\Role;
 
 class Admin extends Component
 {
-    protected $listeners = ['handleFormEdit', 'handleFormView'];
+    protected $listeners = ['editForm', 'viewForm'];
     use WithFileUploads;
 
     public $currentIDUser;
+    public $loadData = false;
     public $changeRole = false;
     public $inputMore;
     public $allRoles;
@@ -34,6 +35,7 @@ class Admin extends Component
         "is_active" => "",
         "role_name" => "",
     ];
+    public $remove_pic = false;
     public $validation_errors = [];
 
     public function mount()
@@ -67,7 +69,9 @@ class Admin extends Component
     }
     public function clearPicture()
     {
+        $this->user['current_picture'] = "";
         $this->user['picture'] = "";
+        $this->remove_pic = true;
     }
 
 
@@ -113,6 +117,10 @@ class Admin extends Component
                 if ($this->user['picture']) {
                     $imageName = $this->user['picture']->store("images", 'public');
                     $query = array_merge($query, ['picture' => $imageName]);
+                }
+
+                if ($this->remove_pic && $this->user['picture'] == "") {
+                    $query['picture'] = "";
                 }
 
                 User::insert($query);
@@ -164,6 +172,10 @@ class Admin extends Component
                     $query = array_merge($query, ['role_id' => $this->user['user_type']]);
                 }
 
+                if ($this->remove_pic && $this->user['picture'] == "") {
+                    $query['picture'] = "";
+                }
+
                 User::where('id', $this->currentIDUser)->update($query);
 
                 $this->emptyUserForm();
@@ -178,9 +190,11 @@ class Admin extends Component
             return $this->validation_errors = [];
         }
     }
-    public function handleFormEdit($_user)
+    public function editForm($id)
     {
+        $_user = User::find($id)->toArray();
         if (Auth::user()->role_id <= $_user['role_id']) {
+            $this->remove_pic = false;
             $this->currentIDUser = $_user['id'];
             $this->user = $_user;
             $this->user['user_type'] = $_user['role_id'];
@@ -188,13 +202,14 @@ class Admin extends Component
             $this->user['picture'] = "";
             $this->user['role_name'] = Role::findOrFail($_user['role_id'])->name;
         } else {
-
             $this->dispatchBrowserEvent('closeModal');
             $this->emitTo('users-table', 'errorMessage', 'Anda tidak bisa mengedit Superuser');
         }
     }
-    public function handleFormView($_user)
+    public function viewForm($id)
     {
+        $this->loadData = true;
+        $_user = User::find($id)->toArray();
         $this->currentIDUser = $_user['id'];
         $this->user = $_user;
 
@@ -203,5 +218,6 @@ class Admin extends Component
 
 
         $this->user['role_name'] = Role::findOrFail($_user['role_id'])->name;
+        $this->loadData = false;
     }
 }

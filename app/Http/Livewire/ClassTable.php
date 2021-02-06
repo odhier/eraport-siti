@@ -8,6 +8,7 @@ use App\Models\KompetensiInti;
 use App\Models\KompetensiIntiDetail;
 use App\Models\Saran;
 use App\Models\StudentClass;
+use App\Models\WaliKelas;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\NumberColumn;

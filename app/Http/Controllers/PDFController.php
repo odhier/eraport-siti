@@ -56,26 +56,54 @@ class PDFController extends Controller
 
         $kds = $this->getKD($this->student_class->classes->tingkat, $this->student_class->tahun_ajaran->id, $semester)->groupBy('course_id');
         foreach ($kds as $kd) {
+            $kd['nilai_terendah_3'] = ($kd->where('ki', 3)->where('NA', $kd->where('ki', 3)->min('NA'))->last());
+            $kd['nilai_tertinggi_3'] = ($kd->where('ki', 3)->where('NA', $kd->where('ki', 3)->max('NA'))->first());
+
+            $kd['nilai_terendah_4'] = ($kd->where('ki', 4)->where('NA', $kd->where('ki', 4)->min('NA'))->last());
+            $kd['nilai_tertinggi_4'] = ($kd->where('ki', 4)->where('NA', $kd->where('ki', 4)->max('NA'))->first());
+
             $kd['course'] = $kd[0]->course;
             $nilai_3 = (($kd->where('ki', 3)->sum('NH') * 2) + $kd->where('ki', 3)->sum('NUTS') + $kd->where('ki', 3)->sum('NUAS'));
             $kd['nilai_akhir_3'] = ($nilai_3) ? ($nilai_3 / 4) / count($kd->where('ki', 3)) : 0;
             $nilai_4 = (($kd->where('ki', 4)->sum('NH') * 2) + $kd->where('ki', 4)->sum('NUTS') + $kd->where('ki', 4)->sum('NUAS'));
             $kd['nilai_akhir_4'] = ($nilai_4) ? ($nilai_4 / 4) / count($kd->where('ki', 4)) : 0;
 
-            $kd['predikat_3'] = (round($kd['nilai_akhir_3']) >= 93) ? "A" : ((round($kd['nilai_akhir_3']) >= 86) ? "B" : ((round($kd['nilai_akhir_3']) >= 80) ? "C" : "D"));
-            $kd['predikat_4'] = (round($kd['nilai_akhir_4']) >= 93) ? "A" : ((round($kd['nilai_akhir_4']) >= 86) ? "B" : ((round($kd['nilai_akhir_4']) >= 80) ? "C" : "D"));
+            $kd['predikat_3'] = ($kd['nilai_akhir_3'] >= 93) ? "A" : (($kd['nilai_akhir_3'] >= 86) ? "B" : (($kd['nilai_akhir_3'] >= 80) ? "C" : "D"));
+            $kd['predikat_4'] = ($kd['nilai_akhir_4'] >= 93) ? "A" : (($kd['nilai_akhir_4'] >= 86) ? "B" : (($kd['nilai_akhir_4'] >= 80) ? "C" : "D"));
+
+            if ($kd['course']->kode == "UMMI") {
+                $msg_3 = Message::select('deskripsi')
+                    ->join('teacher_course', 'messages.teacher_course_id', '=', 'teacher_course.id')
+                    ->where('student_class_id', $student_class_id)->where('semester', $semester)
+                    ->where('ki', 3)->where('teacher_course.course_id', $kd['course']->id)->first();
+                $msg_4 = Message::select('deskripsi')
+                    ->join('teacher_course', 'messages.teacher_course_id', '=', 'teacher_course.id')
+                    ->with('teacher_course')->where('student_class_id', $student_class_id)->where('semester', $semester)
+                    ->where('ki', 4)->where('teacher_course.course_id', $kd['course']->id)->first();
+                $kd['message_3'] = ($msg_3) ? $msg_3->deskripsi : "";
+                $kd['message_4'] = ($msg_4) ? $msg_4->deskripsi : "";
+            } else {
+                $kd['message_3'] = "Ananda {$this->student_class->student->name} ";
+                $kd['message_3'] .= ($kd['nilai_tertinggi_3']->NA > 85) ? "sangat baik" : (($kd['nilai_tertinggi_3']->NA > 70 && $kd['nilai_tertinggi_3']->NA <= 85) ? "sudah baik" : (($kd['nilai_tertinggi_3']->NA > 55 && $kd['nilai_tertinggi_3']->NA <= 70) ? "cukup baik" : "perlu bimbingan"));
+                $kd['message_3'] .= " dalam " . trim($kd['nilai_tertinggi_3']->value);
+
+                if ($kd['nilai_tertinggi_3']->kompetensi_id != $kd['nilai_terendah_3']->kompetensi_id) {
+                    $kd['message_3'] .= ", dan ";
+                    $kd['message_3'] .= ($kd['nilai_terendah_3']->NA > 85) ? "sangat baik" : (($kd['nilai_terendah_3']->NA > 70 && $kd['nilai_terendah_3']->NA <= 85) ? "sudah baik" : (($kd['nilai_terendah_3']->NA > 55 && $kd['nilai_terendah_3']->NA <= 70) ? "cukup baik" : "perlu bimbingan"));
+                    $kd['message_3'] .= " dalam " . trim($kd['nilai_terendah_3']->value);
+                }
+
+                $kd['message_4'] = "Ananda {$this->student_class->student->name} ";
+                $kd['message_4'] .= ($kd['nilai_tertinggi_4']['NA'] > 85) ? "sangat baik" : (($kd['nilai_tertinggi_4']['NA'] > 70 && $kd['nilai_tertinggi_4']['NA'] <= 85) ? "sudah baik" : (($kd['nilai_tertinggi_4']['NA'] > 55 && $kd['nilai_tertinggi_4']['NA'] <= 70) ? "cukup baik" : "perlu bimbingan"));
+                $kd['message_4'] .= " dalam " . trim($kd['nilai_tertinggi_4']['value']);
 
 
-            $msg_3 = Message::select('deskripsi')
-                ->join('teacher_course', 'messages.teacher_course_id', '=', 'teacher_course.id')
-                ->where('student_class_id', $student_class_id)->where('semester', $semester)
-                ->where('ki', 3)->where('teacher_course.course_id', $kd['course']->id)->first();
-            $msg_4 = Message::select('deskripsi')
-                ->join('teacher_course', 'messages.teacher_course_id', '=', 'teacher_course.id')
-                ->with('teacher_course')->where('student_class_id', $student_class_id)->where('semester', $semester)
-                ->where('ki', 4)->where('teacher_course.course_id', $kd['course']->id)->first();
-            $kd['message_3'] = ($msg_3) ? $msg_3->deskripsi : "";
-            $kd['message_4'] = ($msg_4) ? $msg_4->deskripsi : "";
+                if ($kd['nilai_tertinggi_4']['kompetensi_id'] != $kd['nilai_terendah_4']['kompetensi_id']) {
+                    $kd['message_4'] .= ", dan ";
+                    $kd['message_4'] .= ($kd['nilai_terendah_4']['NA'] > 85) ? "sangat baik" : (($kd['nilai_terendah_4']['NA'] > 70 && $kd['nilai_terendah_4']['NA'] <= 85) ? "sudah baik" : (($kd['nilai_terendah_4']['NA'] > 55 && $kd['nilai_terendah_4']['NA'] <= 70) ? "cukup baik" : "perlu bimbingan"));
+                    $kd['message_4'] .= " dalam " . trim($kd['nilai_terendah_4']['value']);
+                }
+            }
         }
         $this->kds = $kds->toArray();
         $data['kds'] = $this->kds;

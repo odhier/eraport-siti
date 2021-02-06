@@ -52,7 +52,7 @@
         .title{
             font-weight: bold;
         }
-        table th{
+        table th, table .head{
             text-align: center;
             font-weight: bold;
         }
@@ -63,7 +63,7 @@
             border: 1px solid black;
             border-collapse: collapse;
         }
-        .table-bordered thead th {
+        .table-bordered thead th, .head>td {
             vertical-align: bottom;
             border-bottom: 2px solid #000;
             background-color: #ccc;
@@ -124,6 +124,16 @@
             width: 130px;
             margin: 0 auto;
         }
+
+        @media print {
+            tr.avoid-page-break  { display: block; page-break-after: avoid; }
+        }
+        table.print-friendly thead tr td, table.print-friendly thead tr th {
+        page-break-inside: avoid;
+    }
+    .nobreak {
+  page-break-inside: avoid;
+}
     </style>
 </head>
 <body>
@@ -209,7 +219,7 @@
     <p style="margin-top:5px;margin-bottom:5px;">KKM Satuan Pendidikan = 80 80</p>
     <table class="table-bordered w-100">
         <thead>
-            <tr>
+            <tr class="avoid-page-break">
                 <th rowspan="2" colspan="2" style="vertical-align: middle;">Muatan Pelajaran</th>
                 <th colspan="3">Pengetahuan</th>
                 <th colspan="3">Ketrampilan</th>
@@ -239,17 +249,15 @@
 
         </tbody>
     </table>
-
+<div class="nobreak">
     <div class="title" style="margin-top:20px;">C. Ekstrakurikuler</div>
     <table class="table-bordered w-100">
-        <thead>
-            <tr>
-                <th style="width:200px;">Kegiatan Ekstrakurikuler</th>
-                <th class="nilai">Nilai</th>
-                <th>Keterangan</th>
-            </tr>
-        </thead>
         <tbody>
+            <tr class="head">
+                <td style="width:200px;">Kegiatan Ekstrakurikuler</td>
+                <td class="nilai">Nilai</td>
+                <td>Keterangan</td>
+            </tr>
             <tr>
                 <td></td>
                 <td></td>
@@ -273,7 +281,7 @@
         </tbody>
     </table>
 
-
+</div>
     <div class="title" style="margin-top:20px;">D. Saran-saran</div>
     <table class="table-bordered w-100">
         <tr>
@@ -282,9 +290,9 @@
             </td>
         </tr>
     </table>
-
+    <div class="nobreak">
     <div class="title" style="margin-top:20px;">E. Perkembangan Fisik</div>
-    <table class="table-bordered w-100 py-0 px-2">
+    <table class="table-bordered w-100 py-0 px-2 print-friendly">
         <thead>
             <tr>
                 <th class="number-col valign-mid" style="vertical-align: middle;" rowspan="2">No</th>
@@ -311,6 +319,8 @@
             </tr>
         </tbody>
     </table>
+</div>
+<div class="nobreak">
     <div class="title" style="margin-top:20px;">F. Kondisi Kesehatan</div>
     <table class="table-bordered w-100 py-0 px-2">
         <thead>
@@ -344,22 +354,22 @@
             </tr>
         </tbody>
     </table>
+</div>
+<div class="nobreak">
     <div class="title" style="margin-top:20px;">G. Catatan Prestasi</div>
     <table class="w-100 table-bordered py-0 px-2">
-        <thead>
-            <tr>
-                <th rowspan="2" style="vertical-align: middle" class="number-col">No</th>
-                <th colspan="2">Semester 1</th>
-                <th colspan="2">Semester 2</th>
-            </tr>
-            <tr>
-                <th>Jenis Prestasi</th>
-                <th>Prestasi</th>
-                <th>Jenis Prestasi</th>
-                <th>Prestasi</th>
-            </tr>
-        </thead>
         <tbody>
+            <tr class="head">
+                <td rowspan="2" style="vertical-align: middle" class="number-col">No</td>
+                <td colspan="2">Semester 1</td>
+                <td colspan="2">Semester 2</td>
+            </tr>
+            <tr class="head">
+                <td>Jenis Prestasi</td>
+                <td>Prestasi</td>
+                <td>Jenis Prestasi</td>
+                <td>Prestasi</td>
+            </tr>
             <tr>
                 <td>1</td>
                 <td></td>
@@ -376,6 +386,8 @@
             </tr>
         </tbody>
     </table>
+</div>
+<div class="nobreak">
     <div class="title" style="margin-top:20px;">H. Ketidakhadiran</div>
     <table class=" py-0 px-2 table-bordered">
         <thead>
@@ -400,6 +412,7 @@
             </tr>
         </tbody>
     </table>
+</div>
     <table class="w-100" style="margin-top:30px;">
         <tr>
             <td style="text-align: left">

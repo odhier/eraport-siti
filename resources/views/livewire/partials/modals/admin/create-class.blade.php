@@ -49,8 +49,10 @@
                     </div>
                     <div class="col-6 text-right ">
                         <button wire:click="emptyForm" data-dismiss="modal" class="btn btn-default my-3">Cancel</button>
-                        <button type="button" wire:click="create" class="btn s-btn-primary my-3 btn-modal-save">Submit</button>
-
+                        <button wire:target="create" wire:loading.attr="disabled" type="button" wire:click="create" class="btn s-btn-primary my-3 btn-modal-save">
+                            <i wire:target="create" wire:loading >Saving...</i>
+                            <span wire:target="create" wire:loading.remove >Submit</span>
+                        </button>
 
                     </div>
                 </div>

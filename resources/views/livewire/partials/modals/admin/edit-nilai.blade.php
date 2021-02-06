@@ -92,17 +92,17 @@
                     </div>
                     <div class="col-sm-2">
                         <label for="nh-{{$index+1}}">Nilai Harian</label>
-                        <input type="text" class="form-control @if($kds[$index]['NH']) is-valid @endif @error('kds.'.$index.'.NH') is-invalid @enderror" id="nh-{{$index+1}}" wire:model.debounce.500ms="kds.{{$index}}.NH">
+                        <input type="text" class="form-control @if($kds[$index]['NH']) is-valid @endif @error('kds.'.$index.'.NH') is-invalid @enderror" id="nh-{{$index+1}}" wire:model.debounce.1000ms="kds.{{$index}}.NH">
                         @error('kds.'.$index.'.NH') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-sm-2">
                         <label for="nakd-{{$index+1}}">Nilai UTS</label>
-                        <input type="text" class="form-control @if($kds[$index]['NUTS']) is-valid @endif @error('kds.'.$index.'.NUTS') is-invalid @enderror" id="nuts-{{$index+1}}" wire:model.debounce.500ms="kds.{{$index}}.NUTS">
+                        <input type="text" class="form-control @if($kds[$index]['NUTS']) is-valid @endif @error('kds.'.$index.'.NUTS') is-invalid @enderror" id="nuts-{{$index+1}}" wire:model.debounce.1000ms="kds.{{$index}}.NUTS">
                         @error('kds.'.$index.'.NUTS') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-sm-2">
                         <label for="nuas-{{$index+1}}">Nilai UAS</label>
-                        <input type="text" class="form-control @if($kds[$index]['NUAS']) is-valid @endif @error('kds.'.$index.'.NUAS') is-invalid @enderror" id="nuas-{{$index+1}}" wire:model.debounce.500ms="kds.{{$index}}.NUAS">
+                        <input type="text" class="form-control @if($kds[$index]['NUAS']) is-valid @endif @error('kds.'.$index.'.NUAS') is-invalid @enderror" id="nuas-{{$index+1}}" wire:model.debounce.1000ms="kds.{{$index}}.NUAS">
                         @error('kds.'.$index.'.NUAS') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-sm-2">
@@ -131,12 +131,16 @@
                 @endforeach
 
                 <hr>
+                @if(strtoupper($course->course->kode) == "UMMI")
                 <div class="row">
                     <div class="col-12">
                         <textarea class="form-control" id="validationTextarea" placeholder="Deskripsi" wire:model="deskripsi.deskripsi"></textarea>
 
                     </div>
                 </div>
+
+                @endif
+
                 <div class=" w-100">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 d-flex align-items-center">

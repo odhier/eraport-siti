@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "304b090f4159e071f94e196a4872999c",
+    "content-hash": "ba54a694724ea5c34e454684ba900c57",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1360,16 +1360,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v2.3.8",
+            "version": "v2.3.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "c661e295428b2baaff04320d0a9424db5ca72be5"
+                "reference": "3ead3ff1342d9b17c7fd3559fd1a5f880cf78f28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/c661e295428b2baaff04320d0a9424db5ca72be5",
-                "reference": "c661e295428b2baaff04320d0a9424db5ca72be5",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/3ead3ff1342d9b17c7fd3559fd1a5f880cf78f28",
+                "reference": "3ead3ff1342d9b17c7fd3559fd1a5f880cf78f28",
                 "shasum": ""
             },
             "require": {
@@ -1418,7 +1418,7 @@
                 }
             ],
             "description": "A front-end framework for Laravel.",
-            "time": "2021-01-21T14:01:48+00:00"
+            "time": "2021-02-03T23:14:23+00:00"
         },
         {
             "name": "maatwebsite/excel",

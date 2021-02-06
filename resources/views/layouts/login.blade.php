@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/login.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap" rel="stylesheet" media="none">
+    <link rel="stylesheet" href="{{ asset('/css/app.css') }}" media="all">
+
+    <link rel="stylesheet" href="{{ asset('/css/login.css') }}" media="all">
     @livewireStyles
 </head>
 <body class="s-bg-main">

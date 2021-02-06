@@ -78,6 +78,6 @@
     'normal' => $rootDir . '/lib/fonts/DejaVuSerif',
   ),
   'stencil' => array(
-    'bold' => $fontDir . '/stencil_bold_d639c327225857216587eb4466022d3e',
+    'bold' => $fontDir . '/stencil_bold_3fc8607105baeac78af3625f53507b0f',
   ),
 ) ?>

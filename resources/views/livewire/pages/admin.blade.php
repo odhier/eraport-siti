@@ -6,6 +6,8 @@
     </div>
     <div class="col-10 main-content position-relative">
         <div class="container">
+
+
         <h2>{{$subMenu}}</h2>
 
              {{-- <livewire:datatable model="App\Models\User" exclude="created_at, updated_at, picture, user_type" searchable="name"/>

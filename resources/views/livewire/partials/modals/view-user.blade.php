@@ -8,9 +8,17 @@
                 </button>
             </div>
         <div class="modal-body ">
+
             <div class="container p-3">
                 <div class="row">
-                    <div class="col text-center">
+                    <div class="col text-center" wire:loading>
+                        <div class="relative group text-primary-500" style="padding-top: 70%">
+                            <div class="absolute top-0 left-0 h-full w-full" style="height: 150px;
+                            width: 150px;
+                            border-radius: 15px;"><span class="skeleton-box group-hover:scale-110 transition-transform transform-center block h-full"></span></div></div>
+                    </div>
+                    <div class="col text-center" wire:loading.remove>
+
                         @if ($user["picture"])
 
                         <div class="pict mb-2" style="background-image: url('{{ $user["picture"]->temporaryUrl() }}'); height: 150px; width:150px;border-radius: 15px;
@@ -34,7 +42,24 @@
                 @endif
                 @endif
             </div>
-            <div class="col-9">
+            <div class="col-9" wire:loading>
+                <div class="flex flex-col flex-grow w-100">
+                    <div class="text-left relative flex-grow w-100">
+                      <h3 class="text-lg font-bold text-gray-darkest mr-10">
+                        <span class="skeleton-box h-5 w-1/6 inline-block"></span>
+                        <span class="skeleton-box h-5 w-1/2 inline-block"></span>
+                        <span class="skeleton-box h-5 w-2/4 inline-block"></span>
+                        <span class="skeleton-box h-5 w-2/5 inline-block"></span>
+                        <span class="skeleton-box h-5 w-full inline-block"></span>
+                        <span class="skeleton-box h-5 w-1/2 inline-block"></span>
+                        <span class="skeleton-box h-5 w-2/4 inline-block"></span>
+                        <span class="skeleton-box h-5 w-2/5 inline-block"></span>
+                        <span class="skeleton-box h-5 w-1/6 inline-block"></span>
+                      </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9" wire:loading.remove>
                 <div class="row">
                     <div class="col-6">User ID</div>
                     <div class="col-6 font-weight-bold">{{$user['id']}}</div>

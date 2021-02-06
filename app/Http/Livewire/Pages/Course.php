@@ -161,9 +161,10 @@ class Course extends Component
         }
         $kkm = $this->getKKM($this->student_class->classes->tingkat, $this->student_class->tahun_ajaran->id);
         $this->kkm = ($kkm) ? $kkm->value : 0;
-
-        $deskripsi = $this->getDeskripsi($this->student_class->classes->tingkat, $this->student_class->tahun_ajaran->id);
-        $this->deskripsi = ($deskripsi) ? $deskripsi->toArray() : [];
+        if (strtoupper($this->course->course->kode) == "UMMI") {
+            $deskripsi = $this->getDeskripsi($this->student_class->classes->tingkat, $this->student_class->tahun_ajaran->id);
+            $this->deskripsi = ($deskripsi) ? $deskripsi->toArray() : [];
+        }
     }
     public function getKD($tingkat = null, $tahun = null)
     {
@@ -202,31 +203,31 @@ class Course extends Component
     }
     public function save()
     {
-        try {
-            $this->deskripsi['deskripsi'] = (isset($this->deskripsi['deskripsi'])) ? $this->deskripsi['deskripsi'] : "";
-            $query_deskripsi = [
-                'student_class_id' => $this->student_class['id'],
-                'teacher_course_id' => $this->course->id,
-                'semester' => $this->selected_semester,
-                'deskripsi' => $this->deskripsi['deskripsi'],
-                'ki' => $this->current_ki,
-            ];
-            if (isset($this->deskripsi['id'])) {
-                $query_deskripsi["updated_at"] = \Carbon\Carbon::now();
-                Message::where('id', $this->deskripsi['id'])
-                    ->update($query_deskripsi);
-            } else {
+        if (strtoupper($this->course->course->kode) == "UMMI") {
+            try {
+                $this->deskripsi['deskripsi'] = (isset($this->deskripsi['deskripsi'])) ? $this->deskripsi['deskripsi'] : "";
+                $query_deskripsi = [
+                    'student_class_id' => $this->student_class['id'],
+                    'teacher_course_id' => $this->course->id,
+                    'semester' => $this->selected_semester,
+                    'deskripsi' => $this->deskripsi['deskripsi'],
+                    'ki' => $this->current_ki,
+                ];
+                if (isset($this->deskripsi['id'])) {
+                    $query_deskripsi["updated_at"] = \Carbon\Carbon::now();
+                    Message::where('id', $this->deskripsi['id'])
+                        ->update($query_deskripsi);
+                } else {
 
-                $query_deskripsi["created_at"] = \Carbon\Carbon::now();
-                Message::insert($query_deskripsi);
+                    $query_deskripsi["created_at"] = \Carbon\Carbon::now();
+                    Message::insert($query_deskripsi);
+                }
+            } catch (\Exception $e) {
+
+                $this->dispatchBrowserEvent('closeModal');
+                return $this->emitTo('course-table', 'errorMessage', 'Gagal menyimpan data');
             }
-        } catch (\Exception $e) {
-
-            $this->dispatchBrowserEvent('closeModal');
-            return $this->emitTo('course-table', 'errorMessage', 'Gagal menyimpan data');
         }
-
-
         if (!$this->getErrorBag()->has('kds.*.*')) {
             foreach ($this->kds as $index => $kd) {
                 try {

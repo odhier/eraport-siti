@@ -11,21 +11,23 @@
     <title>@stack('pagetitle') -  {{ config('app.name') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset(mix('js/app.js')) }}" defer data-turbolinks-track="reload"></script>
-    <livewire:scripts/>
+    <script src="{{ asset(Mix('js/app.js'))}}" defer data-turbolinks-track="reload"></script>
+
+    <livewire:scripts />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
+
 
     @stack('scripts')
 
     <!-- Styles -->
     <livewire:styles/>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css" integrity="sha512-l7qZAq1JcXdHei6h2z8h8sMe3NbMrmowhOl+QkP3UhifPpCW2MC4M0i26Y8wYpbz1xD9t61MLT9L1N773dzlOA==" crossorigin="anonymous" />
+    <link rel="stylesheet" data-turbolinks-track="reload" href="{{ asset('/css/tailwind.css') }}" media="all">
 
-    <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet" data-turbolinks-track="reload">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet" data-turbolinks-track="reload">
+    <link rel="stylesheet" data-turbolinks-track="reload" href="{{ asset('/css/app.css') }}" media="all">
+    <link rel="stylesheet" data-turbolinks-track="reload" href="{{ asset('/css/style.css') }}" media="all" >
+
     @stack('styles')
 </head>
 <body class="s-bg-primary">
@@ -55,7 +57,7 @@
 
             </div>
 
-            <div class="col-10 right-wrapper s-main-text h-100 " data-turbolinks-eval=“false”>
+            <div class="col-10 right-wrapper s-main-text " style="height:auto" data-turbolinks-eval=“false”>
 
 
                 {{ $slot }}
@@ -64,7 +66,6 @@
 
         </div>
     </div>
-
 
     <script>
         window.addEventListener('closeModal', event => {

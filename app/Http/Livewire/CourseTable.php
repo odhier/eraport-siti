@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 
 use App\Models\TeacherCourse;
-use App\Models\Walikelas;
+use App\Models\WaliKelas;
 use App\Models\StudentClass;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Mediconesystems\LivewireDatatables\Column;
@@ -58,7 +58,7 @@ class CourseTable extends LivewireDatatable
                 return "<a href='/courses/{$this->kode}/{$class_id}/" . str_replace('/', '-', $tahun) . "'>" . $tingkat . " (" . $name . ")</a>";
             })->label('Kelas')->searchable(),
             Column::callback(['class_id', 'tahun_ajaran_id'], function ($class, $tahun) {
-                $walikelas = Walikelas::with('user')->where('class_id', $class)->where('tahun_ajaran_id', $tahun)->first();
+                $walikelas = WaliKelas::with('user')->where('class_id', $class)->where('tahun_ajaran_id', $tahun)->first();
                 return ($walikelas) ? $walikelas->user->name : "-";
             })->label('Wali Kelas')->searchable(),
 
@@ -78,13 +78,13 @@ class CourseTable extends LivewireDatatable
                 return "
                 <div class='ui-group-buttons'>
                 <span data-toggle='modal' data-target='#assignNilaiModal' class='p-0'>
-                <a class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Pengetahuan' wire:click=\$emitSelf('editForm','3','{$id}') >
+                <a class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Pengetahuan' wire:click=\"\$emitTo('pages.course','editForm','3','{$id}', '{$this->selected_semester}')\" >
                     KI-3
                 </a>
                 </span>
                 <div class='or'></div>
                 <span data-toggle='modal' data-target='#assignNilaiModal' class='p-0'>
-                <a class='button btn btn-success' data-toggle='tooltip' data-placement='top' title='Keterampilan' wire:click=\$emitSelf('editForm','4','{$id}')'>
+                <a class='button btn btn-success' data-toggle='tooltip' data-placement='top' title='Keterampilan' wire:click=\"\$emitTo('pages.course','editForm','4','{$id}', '{$this->selected_semester}')\">
                 KI-4
                 </a>
                 </span>

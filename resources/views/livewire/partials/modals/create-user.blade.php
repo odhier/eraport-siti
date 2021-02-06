@@ -150,7 +150,11 @@
                     </div>
                     <div class="col-6 text-right ">
                         <button wire:click="emptyUserForm" data-dismiss="modal" class="btn btn-default my-3">Cancel</button>
-                        <button type="button" wire:click="save" class="btn s-btn-primary my-3 btn-modal-save">Submit</button>
+
+                        <button wire:target="save" wire:loading.attr="disabled" type="button" wire:click="save" class="btn s-btn-primary my-3 btn-modal-save">
+                            <i wire:target="save" wire:loading >Saving...</i>
+                            <span wire:target="save" wire:loading.remove >Submit</span>
+                        </button>
 
 
                     </div>
