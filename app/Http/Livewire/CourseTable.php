@@ -84,7 +84,7 @@ class CourseTable extends LivewireDatatable
                 </span>
                 <div class='or'></div>
                 <span data-toggle='modal' data-target='#assignNilaiModal' class='p-0'>
-                <a class='button btn btn-success' data-toggle='tooltip' data-placement='top' title='Keterampilan' wire:click=\"\$emitTo('pages.course','editForm','4','{$id}', '{$this->selected_semester}')\">
+                <a class='button btn btn-success' data-toggle='tooltip' data-placement='top' title='Keterampilan' wire:click=\"'editForm','4','{$id}', '{$this->selected_semester}'\">
                 KI-4
                 </a>
                 </span>
