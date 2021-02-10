@@ -27,6 +27,10 @@
                     <div class="col">NIS</div>
                     <div class="col font-weight-bold">{{$student['nis']}}</div>
                 </div>
+                <div class="row">
+                    <div class="col">Orang Tua/Wali</div>
+                    <div class="col font-weight-bold">{{$student['parent_name']}}</div>
+                </div>
 
                 <div class="row">
                     <div class="col">Is Active</div>

@@ -19,6 +19,7 @@ class AdminStudents extends Component
     public $student = [
         "id" => 0,
         "name" => "",
+        "parent_name" => "",
         "nisn" => "",
         "nis" => "",
         "is_active" => "",
@@ -51,6 +52,7 @@ class AdminStudents extends Component
                     'name' => $this->student['name'],
                     'nisn' => $this->student['nisn'],
                     'nis' => $this->student['nis'],
+                    'parent_name' => $this->student['parent_name'],
                 ];
 
                 $this->model::insert($query);
@@ -83,6 +85,7 @@ class AdminStudents extends Component
             try {
                 $query = [
                     'name' => $this->student['name'],
+                    'parent_name' => $this->student['parent_name'],
                     'nisn' => $this->student['nisn'],
                     'nis' => $this->student['nis'],
                 ];
@@ -94,7 +97,6 @@ class AdminStudents extends Component
                     $this->dispatchBrowserEvent('closeModal');
                 $this->emitTo('admin-students-table', 'successMessage', 'Berhasil memperbarui data murid');
             } catch (\Exception $e) {
-                dd($e);
                 $this->dispatchBrowserEvent('closeModal');
                 $this->emitTo('admin-students-table', 'errorMessage', 'Gagal memperbarui data murid');
             }
@@ -115,6 +117,7 @@ class AdminStudents extends Component
         $this->student = [
             "id" => 0,
             "name" => "",
+            "parent_name" => "",
             "is_active" => "",
             "nisn" => "",
             "nis" => "",

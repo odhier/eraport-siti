@@ -44,6 +44,8 @@ class AdminStudentsTable extends LivewireDatatable
 
             Column::name('name')
                 ->label('Name')->editable(),
+            Column::name('parent_name')
+                ->label('Orang Tua/Wali')->editable(),
 
             Column::name('nisn')->editable(),
             Column::name('nis')->editable(),

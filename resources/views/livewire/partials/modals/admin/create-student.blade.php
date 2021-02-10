@@ -45,6 +45,17 @@
 
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="inputParentName">Nama Orang Tua/Wali</label>
+                                <input type="name" class="form-control" id="inputParentName" placeholder="Masukkan Nama Orang Tua/Wali" wire:model="student.parent_name">
+                                @if(isset($validation_errors["parent_name"]))
+                                @foreach($validation_errors["parent_name"] as $k => $v)
+                                <label for="" class="text-danger">{{ $v }}</label>
+                                @endforeach
+                                @endif
+                            </div>
+                        </div>
 
 
             </div>

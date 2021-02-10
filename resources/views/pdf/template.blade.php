@@ -1,3 +1,19 @@
+<?php
+$bulan = array (
+		'Januari',
+		'Februari',
+		'Maret',
+		'April',
+		'Mei',
+		'Juni',
+		'Juli',
+		'Agustus',
+		'September',
+		'Oktober',
+		'November',
+		'Desember'
+	);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -423,14 +439,20 @@
                     <li>Mengetahui:</li>
                     <li>Orang Tua / Wali,</li>
                     <li style="height: 65px"></li>
+                    @if($student_class['student']['parent_name'])
+                    <li style="text-decoration: underline;font-weight:700;">{{$student_class['student']['parent_name']}}</li>
+                    @else
                     <li>________________</li>
+                    @endif
                 </ul>
                 </div>
             </td>
+
             <td class="text-right">
                 <div class="ttd d-flex flex-column" style="margin-left: auto;width:250px;">
+
                     <ul>
-                    <li>Makassar, 10 Oktober 2020</li>
+                    <li>Makassar, {{date('d')}} {{$bulan[date('n')-1]}} {{date('Y')}}</li>
                     <li>Wali Kelas {{$student_class['classes']['tingkat']}} ( {{$student_class['classes']['name']}} )</li>
 
                     <li style="height: 65px;background: url('{{public_path('storage/'.$wali_kelas['user']['paraf_img'])}}'); width:100%;border-radius: 5px;
@@ -462,6 +484,7 @@
             </td>
         </tr>
     </table>
+
 </div>
 </body>
 </html>

@@ -14,7 +14,7 @@
             @include("livewire.partials.modals.admin.view-student")
             @include('livewire.partials.modals.admin.delete-student')
         </div>
-        <footer class="w-100 position-relative row">
+        <footer class="w-100">
             <livewire:partials.footer>
         </footer>
     </div>
