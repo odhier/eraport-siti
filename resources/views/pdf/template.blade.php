@@ -413,6 +413,8 @@
         </tbody>
     </table>
 </div>
+
+<div class="nobreak">
     <table class="w-100" style="margin-top:30px;">
         <tr>
             <td style="text-align: left">
@@ -441,6 +443,25 @@
                 </div>
             </td>
         </tr>
+        <tr>
+            <td class="text-center" style="width: 100%;">
+                <div class="ttd d-flex flex-column" style="margin-left: auto;width:250px;">
+                <ul>
+                    <li>Kepala Sekolah,</li>
+                    <li style="height: 65px;background: url('{{public_path('images/paraf_kepsek.png')}}'); width:100%;border-radius: 5px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;"></li>
+                    <li style="text-decoration: underline;font-weight:700;">Masita Dasa. S.Sos.. M.Pd.I</li>
+                    <li>NIP. {{($wali_kelas['user']['NIP'])?$wali_kelas['user']['NIP']:"-"}}</li>
+                </ul>
+                <div style="background: url('{{public_path('images/cap_sitikhtiar.png')}}'); background-position: left bottom;
+                background-repeat: no-repeat;
+                background-size: contain;width:100%;height:90px;position:relative; left:-30px;top:30px"></div>
+                </div>
+            </td>
+        </tr>
     </table>
+</div>
 </body>
 </html>
