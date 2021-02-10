@@ -7,8 +7,8 @@
     </div>
     <div class="col-10 main-content position-relative">
         <div class="container">
-        
-        
+
+
         @if(empty($class_detail))
                 @if(!$class_id)
                     <h2>{{__('Silahkan Pilih Kelas')}}</h2>
@@ -29,7 +29,7 @@
         @endif
         @endif
         </div>
-        <footer class="w-100">
+        <footer class="w-100 position-relative row">
             <livewire:partials.footer>
         </footer>
     </div>

@@ -110,7 +110,7 @@ class PDFController extends Controller
         $data['absensi'] = Absensi::where('student_class_id', $this->student_class->id)->where('semester', $semester)->first();
         $pdf = PDF::loadView('pdf.template', $data);
         // $pdf->download('invoice.pdf');
-        // return view('pdf.tes', $data);
+        // return view('pdf.template', $data);
         return $pdf->stream();
     }
     public function getKD($tingkat = null, $tahun = null, $semester)

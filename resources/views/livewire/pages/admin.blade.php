@@ -17,9 +17,10 @@
             @include("livewire.partials.modals.create-user" , ['subMenu' => $subMenu])
             @include("livewire.partials.modals.edit-user" , ['subMenu' => $subMenu])
             @include("livewire.partials.modals.view-user" , ['subMenu' => $subMenu])
+            @include("livewire.partials.modals.edit-paraf" , ['subMenu' => $subMenu])
             @include('livewire.partials.modals.delete-user')
         </div>
-        <footer class="w-100">
+        <footer class="w-100 position-relative row">
             <livewire:partials.footer>
         </footer>
     </div>

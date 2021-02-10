@@ -28,7 +28,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="inputEditName">Nama Lengkap <span class="text-danger">*</span></label>
-                                <input type="name" class="form-control" id="inputEditName" placeholder="Masukkan Nama Lengkap" wire:model="user.name">
+                                <input type="name" class="form-control" id="inputEditName" placeholder="Masukkan Nama Lengkap" wire:model.defer="user.name">
                                 @if(isset($validation_errors["name"]))
                                 @foreach($validation_errors["name"] as $k => $v)
                                 <label for="" class="text-danger">{{ $v }}</label>
@@ -39,7 +39,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="InputEmailEmail">Email address <span class="text-danger">*</span></label>
-                                <input type="email" class="form-control" id="InputEmailEmail" aria-describedby="emailHelp" wire:model="user.email" placeholder="Masukkan Alamat Email">
+                                <input type="email" class="form-control" id="InputEmailEmail" aria-describedby="emailHelp" wire:model.defer="user.email" placeholder="Masukkan Alamat Email">
                                 @if(isset($validation_errors["email"]))
                                 @foreach($validation_errors["email"] as $k => $v)
                                 <label for="" class="text-danger">{{ $v }}</label>
@@ -53,7 +53,7 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="InputEditNIP">NIP</label>
-                                <input type="text" class="form-control" id="InputEditNIP" placeholder="Masukkan NIP" wire:model="user.NIP">
+                                <input type="text" class="form-control" id="InputEditNIP" placeholder="Masukkan NIP" wire:model.defer="user.NIP">
                                 @if(isset($validation_errors["NIP"]))
                                 @foreach($validation_errors["NIP"] as $k => $v)
                                 <label for="" class="text-danger">{{ $v }}</label>
@@ -64,7 +64,7 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="inputEditRole">Role<span class="text-danger">*</span></label>
-                                <select id="inputEditRole" class="form-control" wire:model="user.user_type" wire:change="$set('changeRole', true)">
+                                <select id="inputEditRole" class="form-control" wire:model.defer="user.user_type" wire:change="$set('changeRole', true)">
                                     @foreach ($allRoles as $role => $name)
                                         <option value="{{$role}}" wire:key="{{$role}}">{{$name}}</option>
                                     @endforeach

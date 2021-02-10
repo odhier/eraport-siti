@@ -13,7 +13,7 @@ use App\Models\Role;
 
 class Admin extends Component
 {
-    protected $listeners = ['editForm', 'viewForm'];
+    protected $listeners = ['editForm', 'viewForm', 'editFormParaf'];
     use WithFileUploads;
 
     public $currentIDUser;
@@ -28,14 +28,17 @@ class Admin extends Component
         "name" => "",
         "email" => "",
         "picture" => "",
+        "picture_paraf" => "",
         "NIP" => "",
         "password" => "",
         "confirm_password" => "",
         "current_picture" => "",
+        "current_picture_paraf" => "",
         "is_active" => "",
         "role_name" => "",
     ];
     public $remove_pic = false;
+    public $remove_pic_paraf = false;
     public $validation_errors = [];
 
     public function mount()
@@ -57,10 +60,12 @@ class Admin extends Component
             "name" => "",
             "email" => "",
             "picture" => "",
+            "picture_paraf" => "",
             "NIP" => "",
             "password" => "",
             "confirm_password" => "",
             "current_picture" => "",
+            "current_picture_paraf" => "",
             "is_active" => "",
             "role_name" => "",
         ];
@@ -73,7 +78,12 @@ class Admin extends Component
         $this->user['picture'] = "";
         $this->remove_pic = true;
     }
-
+    public function clearPictureParaf()
+    {
+        $this->user['current_picture_paraf'] = "";
+        $this->user['picture_paraf'] = "";
+        $this->remove_pic_paraf = true;
+    }
 
     public function save()
     {
@@ -135,6 +145,43 @@ class Admin extends Component
             return $this->validation_errors = [];
         }
     }
+    public function _updateParaf()
+    {
+        $rulesEdit = [
+            'picture_paraf' => 'image|max:10240',
+        ];
+        $messages = [
+            "picture_paraf.image" => "File yang anda masukkan bukan JPG/PNG",
+            "picture_paraf.max" => "File gambar terlalu besar | Max 10Mb"
+        ];
+        $validator_object = Validator::make($this->user, $rulesEdit, $messages);
+        if ($validator_object->fails()) {
+            return $this->validation_errors = $validator_object->errors()->toArray();
+        } else {
+            try {
+
+
+                if ($this->remove_pic_paraf && $this->user['picture_paraf'] == "") {
+                    $query['paraf_img'] = "";
+                } else {
+                    $imageName = $this->user['picture_paraf']->store("images", 'public');
+                    $query['paraf_img'] =  $imageName;
+                }
+
+                User::where('id', $this->currentIDUser)->update($query);
+
+                $this->emptyUserForm();
+                $this->dispatchBrowserEvent('closeModal');
+                $this->emitTo('users-table', 'successMessage', 'User berhasil diperbarui.');
+
+                return $this->validation_errors = [];
+            } catch (\Exception $e) {
+                $this->dispatchBrowserEvent('closeModal');
+                $this->emitTo('users-table', 'errorMessage', 'Gagal memperbarui user');
+            }
+            return $this->validation_errors = [];
+        }
+    }
     public function _update()
     {
 
@@ -190,6 +237,7 @@ class Admin extends Component
             return $this->validation_errors = [];
         }
     }
+
     public function editForm($id)
     {
         $_user = User::find($id)->toArray();
@@ -200,6 +248,8 @@ class Admin extends Component
             $this->user['user_type'] = $_user['role_id'];
             $this->user['current_picture'] = ($_user["picture"]) ? $_user["picture"] : "";
             $this->user['picture'] = "";
+            $this->user['current_picture_paraf'] = ($_user["paraf_img"]) ? $_user["paraf_img"] : "";
+            $this->user['picture_paraf'] = "";
             $this->user['role_name'] = Role::findOrFail($_user['role_id'])->name;
         } else {
             $this->dispatchBrowserEvent('closeModal');

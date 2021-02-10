@@ -16,7 +16,7 @@
 
 
         </div>
-        <footer class="w-100">
+        <footer class="w-100 position-relative row">
             <livewire:partials.footer>
         </footer>
     </div>

@@ -430,7 +430,11 @@
                     <ul>
                     <li>Makassar, 10 Oktober 2020</li>
                     <li>Wali Kelas {{$student_class['classes']['tingkat']}} ( {{$student_class['classes']['name']}} )</li>
-                    <li style="height: 65px"></li>
+
+                    <li style="height: 65px;background: url('{{public_path('storage/'.$wali_kelas['user']['paraf_img'])}}'); width:100%;border-radius: 5px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;"></li>
                     <li style="text-decoration: underline;font-weight:700;">{{$wali_kelas['user']['name']}}</li>
                     <li>NIP. {{($wali_kelas['user']['NIP'])?$wali_kelas['user']['NIP']:"-"}}</li>
                 </ul>
