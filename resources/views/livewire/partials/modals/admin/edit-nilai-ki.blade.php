@@ -105,13 +105,7 @@
 
                 @endforeach
 
-                <hr>
-                <div class="row">
-                    <div class="col-12">
-                        <textarea class="form-control" id="validationTextarea" placeholder="Deskripsi" wire:model="deskripsi.deskripsi"></textarea>
 
-                    </div>
-                </div>
                 <div class=" w-100">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 d-flex align-items-center">

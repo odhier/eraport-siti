@@ -42,14 +42,20 @@ class PDFController extends Controller
         $nilaiKi = KompetensiInti::with('ki_detail')->get();
         foreach ($nilaiKi as $nilai) {
             $nilai->nilai_lengkap = true;
+            $k = [];
             foreach ($nilai->ki_detail as $detail) {
                 $n = NilaiKI::select('value')->where('student_class_id', $student_class_id)->where('ki_detail_id', $detail->id)->first();
                 $nilai->nilai_lengkap = (!$n || $n->value == 0) ? false : $nilai->nilai_lengkap;
                 $detail->value = ($n) ? $n->value : 0;
+                $k[] = $detail->kompetensi;
             }
+
             $nilai->nilai_akhir = round($nilai->ki_detail->avg('value'));
-            $message = MessageKI::where('ki_id', $nilai->id)->where('semester', $semester)->where('student_class_id', $student_class_id)->first();
-            $nilai->message = ($message) ? $message->deskripsi : "";
+            // $message = MessageKI::where('ki_id', $nilai->id)->where('semester', $semester)->where('student_class_id', $student_class_id)->first();
+            // $nilai->message = ($message) ? $message->deskripsi : "";
+            $nilai->message = "Ananda {$this->student_class->student->name} ";
+            $nilai->message .= ($nilai->nilai_akhir == 4) ? "sangat baik" : (($nilai->nilai_akhir == 4) ? "sudah baik" : (($nilai->nilai_akhir == 4) ? "cukup baik" : "perlu bimbingan"));
+            $nilai->message .= " dalam " . implode(", ", $k) . ".";
         }
         $this->nilaiKi = $nilaiKi;
         $data['nilaiKi'] = $this->nilaiKi;

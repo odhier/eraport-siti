@@ -225,31 +225,7 @@ class Classes extends Component
     }
     public function save()
     {
-        try {
-            $query_deskripsi = [
-                'student_class_id' => $this->student_class['id'],
-                'teacher_id' => Auth::user()->id,
-                'semester' => $this->selected_semester,
-                'deskripsi' => $this->deskripsi['deskripsi'],
-                'ki_id' => $this->current_ki,
-            ];
-            if (isset($this->deskripsi['id'])) {
-                $query_deskripsi["updated_at"] = \Carbon\Carbon::now();
-                MessageKI::where('id', $this->deskripsi['id'])
-                    ->update($query_deskripsi);
-            } else {
-                $query_deskripsi["created_at"] = \Carbon\Carbon::now();
-                MessageKI::insert($query_deskripsi);
-            }
-            if (!$this->inputMore) {
-                $this->dispatchBrowserEvent('closeModal');
-                $this->emptyForm();
-            }
-            $this->emitTo('class-table', 'successMessage', 'Berhasil menyimpan data');
-        } catch (\Exception $e) {
-            $this->dispatchBrowserEvent('closeModal');
-            return $this->emitTo('class-table', 'errorMessage', 'Gagal menyimpan data');
-        }
+
         if (!$this->getErrorBag()->has('kds.*.*')) {
             foreach ($this->kds as $index => $kd) {
                 try {

@@ -311,7 +311,7 @@ $bulan = array (
     <table class="table-bordered w-100 py-0 px-2 print-friendly">
         <thead>
             <tr>
-                <th class="number-col valign-mid" style="vertical-align: middle;" rowspan="2">No</th>
+                <th class="number-col" style="vertical-align: middle;" rowspan="2">No</th>
                 <th rowspan="2" class="valign-mid" style="vertical-align: middle;">Aspek Yang Dinilai</th>
                 <th colspan="2">Semester</th>
             </tr>
@@ -322,13 +322,13 @@ $bulan = array (
         </thead>
         <tbody>
             <tr>
-                <td>1</td>
+                <td class="number-col ">1</td>
                 <td>Tinggi</td>
                 <td class="text-center">cm</td>
                 <td class="text-center">cm</td>
             </tr>
             <tr>
-                <td>2</td>
+                <td class="number-col ">2</td>
                 <td>Berat</td>
                 <td class="text-center">kg</td>
                 <td class="text-center">kg</td>
