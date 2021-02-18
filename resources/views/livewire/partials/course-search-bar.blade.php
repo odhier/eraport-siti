@@ -4,7 +4,7 @@
 
     <input
         placeholder="Cari Mata Pelajaran..."
-        wire:model="query"
+        wire:model.lazy="query"
         wire:keydown.escape="_reset"
         wire:keydown.tab="tabPressed"
         wire:keydown.arrow-up="decrementHighlight"

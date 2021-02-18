@@ -6,12 +6,13 @@ use Livewire\Component;
 use App\Models\StudentClass;
 use App\Models\TahunAjaran;
 use App\Models\Navs\NavAdmin;
+use App\Models\Student;
 use Illuminate\Support\Facades\Validator;
 
 class AdminStudentClass extends Component
 {
     public $model = StudentClass::class;
-    protected $listeners = ['handleUpdateForm', 'handleViewForm', 'setStudent', 'setClass'];
+    protected $listeners = ['editForm', 'handleViewForm', 'setStudent', 'setClass'];
     public $currentID;
     public $inputMore;
     public $menu;
@@ -39,8 +40,9 @@ class AdminStudentClass extends Component
         $this->menu = NavAdmin::getMenu();
         $this->allTahun = TahunAjaran::orderBy('id', 'desc')->get();
     }
-    public function handleUpdateForm($SClass)
+    public function handleUpdateForm($id)
     {
+        $SClass = Student::findOrFail($id);
         $this->currentID = $SClass['id'];
         $this->SClass = $SClass;
     }
