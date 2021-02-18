@@ -266,6 +266,8 @@ class Admin extends Component
         $this->user['current_picture'] = ($_user["picture"]) ? $_user["picture"] : "";
         $this->user['picture'] = "";
 
+        $this->user['current_picture_paraf'] = ($_user["paraf_img"]) ? $_user["paraf_img"] : "";
+        $this->user['picture_paraf'] = "";
 
         $this->user['role_name'] = Role::findOrFail($_user['role_id'])->name;
         $this->loadData = false;
