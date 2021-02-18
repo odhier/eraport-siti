@@ -172,7 +172,17 @@
                 <h5 class="text-center p-3">Kompetensi Dasar belum dibuat untuk Pelajaran, Kelas, dan Tahun ajaran ini. silahkan hubungi admin untuk menginput Kompetensi Dasar</h5>
                 @endif
                 @else
-                <h2>Oops, mata pelajaran tidak ditemukan</h2>
+                <h5 class="animate-bounce">Loading Data...</h5>
+                <div class="animate-pulse flex space-x-4">
+
+                    <div class="flex-1 space-y-4 py-1">
+                      <div class="h-4 bg-gray-400 rounded w-3/4"></div>
+                      <div class="space-y-2">
+                        <div class="h-4 bg-gray-400 rounded"></div>
+                        <div class="h-4 bg-gray-400 rounded w-5/6"></div>
+                      </div>
+                    </div>
+                  </div>
                 @endif
                 </.>
             </div>
