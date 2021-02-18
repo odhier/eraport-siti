@@ -76,7 +76,6 @@ class AdminStudentsTable extends LivewireDatatable
 
     public function _delete()
     {
-        dd("cokk");
         $student = Student::findOrFail($this->_id);
         if ($student) {
             $this->delete($this->_id);
