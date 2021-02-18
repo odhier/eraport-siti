@@ -12,7 +12,7 @@
 
              {{-- <livewire:datatable model="App\Models\User" exclude="created_at, updated_at, picture, user_type" searchable="name"/>
             --}}
-            <livewire:users-table searchable="users.name, email" hideable="select" editable deletable />
+            <livewire:users-table searchable="users.name, email" hideable="select" editable />
 
             @include("livewire.partials.modals.create-user" , ['subMenu' => $subMenu])
             @include("livewire.partials.modals.edit-user" , ['subMenu' => $subMenu])

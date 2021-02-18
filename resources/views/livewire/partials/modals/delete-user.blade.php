@@ -1,4 +1,3 @@
-<!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -15,7 +14,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" wire:click="$emitTo('users-table', '_delete')" class="btn btn-danger" data-dismiss="modal">Hapus</button>
+                <a wire:click="tes">Delete</a>
+                <button wire:click="$emitTo('users-table','handleDelete')" class="btn btn-danger" data-dismiss="modal">Hapus</button>
             </div>
         </div>
     </div>

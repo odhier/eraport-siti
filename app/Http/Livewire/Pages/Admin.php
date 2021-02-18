@@ -13,7 +13,7 @@ use App\Models\Role;
 
 class Admin extends Component
 {
-    protected $listeners = ['editForm', 'viewForm', 'editFormParaf'];
+    protected $listeners = ['editForm', 'viewForm', 'editFormParaf', '_delete'];
     use WithFileUploads;
 
     public $currentIDUser;
