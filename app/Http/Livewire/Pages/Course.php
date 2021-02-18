@@ -161,15 +161,16 @@ class Course extends Component
         }
         $kkm = $this->getKKM($this->student_class->classes->tingkat, $this->student_class->tahun_ajaran->id);
         $this->kkm = ($kkm) ? $kkm->value : 0;
-        if (strtoupper($this->course->course->kode) == "UMMI") {
+        if (strtoupper($this->course['course']['kode']) == "UMMI") {
             $deskripsi = $this->getDeskripsi($this->student_class->classes->tingkat, $this->student_class->tahun_ajaran->id);
             $this->deskripsi = ($deskripsi) ? $deskripsi->toArray() : [];
         }
     }
     public function getKD($tingkat = null, $tahun = null)
     {
+        // dd($this->course->course);
         return KompetensiDasar::select('kompetensi_dasar.id as kompetensi_id', 'kompetensi_dasar.*', 'nilai.id as nilai_id', 'nilai.*')
-            ->where('course_id', $this->course->course->id)
+            ->where('course_id', $this->course['course']['id'])
             ->when($tingkat, function ($query, $tingkat) {
                 return $query->where('tingkat_kelas', $tingkat);
             })->where('tahun_ajaran_id', (!empty($tahun)) ? $tahun : 0)
@@ -182,7 +183,7 @@ class Course extends Component
     }
     public function getKKM($tingkat = null, $tahun = null)
     {
-        return KKM::where('course_id', $this->course->course->id)->when($tingkat, function ($query, $tingkat) {
+        return KKM::where('course_id', $this->course['course']['id'])->when($tingkat, function ($query, $tingkat) {
             return $query->where('tingkat_kelas', $tingkat);
         })->where('tahun_ajaran_id', (!empty($tahun)) ? $tahun : 0)
             ->where('ki', $this->current_ki)->first();
@@ -203,7 +204,7 @@ class Course extends Component
     }
     public function save()
     {
-        if (strtoupper($this->course->course->kode) == "UMMI") {
+        if (strtoupper($this->course['course']['kode']) == "UMMI") {
             try {
                 $this->deskripsi['deskripsi'] = (isset($this->deskripsi['deskripsi'])) ? $this->deskripsi['deskripsi'] : "";
                 $query_deskripsi = [
