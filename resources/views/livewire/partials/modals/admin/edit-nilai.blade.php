@@ -7,7 +7,20 @@
                     <span aria-hidden="true">×</span>
                 </a>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" wire:loading wire:target="editForm">
+                <h5 class="animate-bounce">Loading Data...</h5>
+                <div class="animate-pulse flex space-x-4">
+
+                    <div class="flex-1 space-y-4 py-1">
+                      <div class="h-4 bg-gray-400 rounded w-3/4"></div>
+                      <div class="space-y-2">
+                        <div class="h-4 bg-gray-400 rounded"></div>
+                        <div class="h-4 bg-gray-400 rounded w-5/6"></div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="modal-body" wire:loading.remove wire:target="editForm">
 
                 @if($student_class)
                 <div class="row">
@@ -92,17 +105,17 @@
                     </div>
                     <div class="col-sm-2">
                         <label for="nh-{{$index+1}}">Nilai Harian</label>
-                        <input type="text" class="form-control @if($kds[$index]['NH']) is-valid @endif @error('kds.'.$index.'.NH') is-invalid @enderror" id="nh-{{$index+1}}" wire:model.debounce.1000ms="kds.{{$index}}.NH">
+                        <input type="text" class="form-control @if($kds[$index]['NH']) is-valid @endif @error('kds.'.$index.'.NH') is-invalid @enderror" id="nh-{{$index+1}}" wire:model="kds.{{$index}}.NH">
                         @error('kds.'.$index.'.NH') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-sm-2">
                         <label for="nakd-{{$index+1}}">Nilai UTS</label>
-                        <input type="text" class="form-control @if($kds[$index]['NUTS']) is-valid @endif @error('kds.'.$index.'.NUTS') is-invalid @enderror" id="nuts-{{$index+1}}" wire:model.debounce.1000ms="kds.{{$index}}.NUTS">
+                        <input type="text" class="form-control @if($kds[$index]['NUTS']) is-valid @endif @error('kds.'.$index.'.NUTS') is-invalid @enderror" id="nuts-{{$index+1}}" wire:model="kds.{{$index}}.NUTS">
                         @error('kds.'.$index.'.NUTS') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-sm-2">
                         <label for="nuas-{{$index+1}}">Nilai UAS</label>
-                        <input type="text" class="form-control @if($kds[$index]['NUAS']) is-valid @endif @error('kds.'.$index.'.NUAS') is-invalid @enderror" id="nuas-{{$index+1}}" wire:model.debounce.1000ms="kds.{{$index}}.NUAS">
+                        <input type="text" class="form-control @if($kds[$index]['NUAS']) is-valid @endif @error('kds.'.$index.'.NUAS') is-invalid @enderror" id="nuas-{{$index+1}}" wire:model="kds.{{$index}}.NUAS">
                         @error('kds.'.$index.'.NUAS') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="col-sm-2">
