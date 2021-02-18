@@ -4,7 +4,7 @@
 
     <input
         placeholder="Cari Guru..."
-        wire:model.lazy="query"
+        wire:model="query"
         wire:keydown.escape="_reset"
         wire:keydown.tab="tabPressed"
         wire:keydown.arrow-up="decrementHighlight"
