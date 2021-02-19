@@ -1,4 +1,4 @@
-<div class="relative">
+<div class="relative" id="teacher-field">
     <div class="form-group">
         <label for="InputGuru">Guru<span class="text-danger">*</span></label>
 
@@ -16,9 +16,9 @@
 
 
     @if(!empty($query))
-        <div class="fixed top-0 right-0 bottom-0 left-0 blocker" wire:click="_reset"></div>
+        <div class="fixed top-0 right-0 bottom-0 left-0 blocker qw-teacher" wire:click="_reset"></div>
 
-        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg p-3 result-student-search">
+        <div class="absolute z-10 list-group bg-white w-full rounded-t-none shadow-lg p-3 result-student-search qw-teacher">
             @if(!empty($teachers))
                 @foreach($teachers as $i => $teacher)
                     <a wire:click="selectContact({{$i}})"
@@ -30,7 +30,15 @@
             @endif
         </div>
     @endif
-
+    @push('scripts-bottom')
+    <script>
+        document.addEventListener('DOMContentLoaded', function(event) {
+        $("#teacher-field").focusout(function(){
+            $(".qw-teacher").delay(500).hide(0);
+        })
+        });
+    </script>
+    @endpush
 
     </div>
 </div>
