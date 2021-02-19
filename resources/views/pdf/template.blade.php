@@ -250,9 +250,10 @@ $bulan = array (
             </tr>
         </thead>
         <tbody>
+            @php $i=1; @endphp
             @foreach ($kds as $indexnilai => $kd)
             <tr>
-                <td class="number-col">{{$indexnilai+1}}</td>
+                <td class="number-col">{{$i}}</td>
                 <td class="sec-col">{{$kd['course']['name']}}</td>
                 <td class="nilai">{{round($kd['nilai_akhir_3'])}}</td>
                 <td class="predikat">{{$kd['predikat_3']}}</td>
@@ -261,6 +262,7 @@ $bulan = array (
                 <td class="predikat">{{$kd['predikat_4']}}</td>
                 <td class="desc">{{$kd['message_4']}}</td>
             </tr>
+            @php $i++; @endphp
             @endforeach
 
         </tbody>
