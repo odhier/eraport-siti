@@ -35,7 +35,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function(event) {
         $("#class-field").focusout(function(){
-            $(".qw-class").delay(1000).hide(0);
+            $(".qw-class").delay(500).hide(0);
         })
         });
     </script>

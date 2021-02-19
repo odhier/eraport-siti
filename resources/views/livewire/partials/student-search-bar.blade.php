@@ -34,7 +34,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function(event) {
         $("#student-field").focusout(function(){
-            $(".qw-student").delay(1000).hide(0);
+            $(".qw-student").delay(500).hide(0);
         })
         });
     </script>
