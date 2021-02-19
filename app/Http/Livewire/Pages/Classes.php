@@ -77,7 +77,7 @@ class Classes extends Component
         $this->getAllClass($tahun_id);
         $this->class_detail = ($class_id) ? $this->getClassDetail($class_id) : null;
         if (empty($this->classes)) {
-            $this->menu['_msg'] = "Sepertinya belum ada mata pelajaran untuk anda tahun ini";
+            $this->menu['_msg'] = "Sepertinya belum ada kelas untuk anda tahun ini";
         } else {
             unset($this->menu['_msg']);
         }
