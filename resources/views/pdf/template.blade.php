@@ -317,7 +317,7 @@ $bulan = array (
             </tr>
             <tr>
                 <th>1</th>
-                <th>-</th>
+                <th>2</th>
             </tr>
         </thead>
         <tbody>
