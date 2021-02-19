@@ -232,7 +232,7 @@ $bulan = array (
         </tbody>
     </table>
     <div class="title" style="margin-top:5px;">B. PENGETAHUAN DAN KETRAMPILAN</div>
-    <p style="margin-top:5px;margin-bottom:5px;">KKM Satuan Pendidikan = 80 80</p>
+    <p style="margin-top:5px;margin-bottom:5px;">KKM Satuan Pendidikan = 80</p>
     <table class="table-bordered w-100">
         <thead>
             <tr class="avoid-page-break">
