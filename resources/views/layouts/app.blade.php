@@ -82,5 +82,7 @@
             $('body').tooltip({selector: '[data-toggle="tooltip"]'});
     });
     </script>
+
+@stack('scripts-bottom')
 </body>
 </html>
