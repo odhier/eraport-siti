@@ -182,7 +182,7 @@ $bulan = array (
                     <tr>
                         <td>Nama Sekolah</td>
                         <td>:</td>
-                        <td>SDIT IKHTIAR</td>
+                        <td>SEKOLAH DASAR ISLAM TERPADU IKHTIAR</td>
                     </tr>
                     <tr>
                         <td>Alamat Sekolah</td>
@@ -194,9 +194,9 @@ $bulan = array (
             <td style="vertical-align: top;">
                 <table>
                     <tr>
-                        <td>Kelas</td>
-                        <td>:</td>
-                        <td >{{$student_class['classes']['tingkat']}} ( {{$student_class['classes']['name']}} )</td>
+                        <td style="vertical-align: top;">Kelas</td>
+                        <td style="vertical-align: top;">:</td>
+                        <td style="vertical-align: top;">{{$student_class['classes']['tingkat']}} ( {{$student_class['classes']['name']}} )</td>
                     </tr>
                     <tr>
                         <td>Semester</td>
@@ -204,9 +204,9 @@ $bulan = array (
                         <td>{{$semester_name}}</td>
                     </tr>
                     <tr>
-                        <td>Tahun Pelajaran</td>
-                        <td>:</td>
-                        <td>{{$wali_kelas['tahun_ajaran']['tahun_ajaran']}}</td>
+                        <td style="vertical-align: top;">Tahun Pelajaran</td>
+                        <td style="vertical-align: top;">:</td>
+                        <td style="vertical-align: top;">{{$wali_kelas['tahun_ajaran']['tahun_ajaran']}}</td>
                     </tr>
 
                 </table>
