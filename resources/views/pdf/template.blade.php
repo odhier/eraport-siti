@@ -454,11 +454,14 @@ $bulan = array (
                     <ul>
                     <li>Makassar, {{date('d')}} {{$bulan[date('n')-1]}} {{date('Y')}}</li>
                     <li>Wali Kelas {{$student_class['classes']['tingkat']}} ( {{$student_class['classes']['name']}} )</li>
-
+                    @if($wali_kelas['user']['paraf_img'])
                     <li style="height: 65px;background: url('{{public_path('storage/'.$wali_kelas['user']['paraf_img'])}}'); width:100%;border-radius: 5px;
                     background-position: center;
                     background-repeat: no-repeat;
                     background-size: contain;"></li>
+                    @else
+                    <li style="height:65px"></li>
+                    @endif
                     <li style="text-decoration: underline;font-weight:700;">{{$wali_kelas['user']['name']}}</li>
                     <li>NIP. {{($wali_kelas['user']['NIP'])?$wali_kelas['user']['NIP']:"-"}}</li>
                 </ul>
