@@ -64,9 +64,13 @@ class PDFController extends Controller
         foreach ($kds as $kd) {
             $kd['nilai_terendah_3'] = ($kd->where('ki', 3)->where('NA', $kd->where('ki', 3)->min('NA'))->last());
             $kd['nilai_tertinggi_3'] = ($kd->where('ki', 3)->where('NA', $kd->where('ki', 3)->max('NA'))->first());
+            $kd['nilai_tertinggi_3']->NA = (($kd['nilai_tertinggi_3']->NH * 2)+$kd['nilai_tertinggi_3']->NUTS+$kd['nilai_tertinggi_3']->NUAS)/4;
+            $kd['nilai_terendah_3']->NA = (($kd['nilai_terendah_3']->NH * 2)+$kd['nilai_terendah_3']->NUTS+$kd['nilai_terendah_3']->NUAS)/4;
 
             $kd['nilai_terendah_4'] = ($kd->where('ki', 4)->where('NA', $kd->where('ki', 4)->min('NA'))->last());
             $kd['nilai_tertinggi_4'] = ($kd->where('ki', 4)->where('NA', $kd->where('ki', 4)->max('NA'))->first());
+            $kd['nilai_tertinggi_4']->NA = (($kd['nilai_tertinggi_4']->NH * 2)+$kd['nilai_tertinggi_4']->NUTS+$kd['nilai_tertinggi_4']->NUAS)/4;
+            $kd['nilai_terendah_4']->NA = (($kd['nilai_terendah_4']->NH * 2)+$kd['nilai_terendah_4']->NUTS+$kd['nilai_terendah_4']->NUAS)/4;
 
             $kd['course'] = $kd[0]->course;
             $nilai_3 = (($kd->where('ki', 3)->sum('NH') * 2) + $kd->where('ki', 3)->sum('NUTS') + $kd->where('ki', 3)->sum('NUAS'));
@@ -89,6 +93,7 @@ class PDFController extends Controller
                 $kd['message_3'] = ($msg_3) ? $msg_3->deskripsi : "";
                 $kd['message_4'] = ($msg_4) ? $msg_4->deskripsi : "";
             } else {
+
                 $kd['message_3'] = "Ananda {$this->student_class->student->name} ";
                 $kd['message_3'] .= ($kd['nilai_tertinggi_3']->NA > 85) ? "sangat baik" : (($kd['nilai_tertinggi_3']->NA > 70 && $kd['nilai_tertinggi_3']->NA <= 85) ? "sudah baik" : (($kd['nilai_tertinggi_3']->NA > 55 && $kd['nilai_tertinggi_3']->NA <= 70) ? "cukup baik" : "perlu bimbingan"));
                 $kd['message_3'] .= " dalam " . trim($kd['nilai_tertinggi_3']->value);
