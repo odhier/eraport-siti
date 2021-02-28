@@ -86,7 +86,7 @@ class Course extends Component
     public function import(){
         $this->isUploading=true;
         try{
-        $array = Excel::toArray(new NilaiImport, $this->file['excel']);
+        $array = Excel::toArray(new NilaiImport, $this->excel);
         $sc_id=0;
         $row = 1;
         $ii = 0;
