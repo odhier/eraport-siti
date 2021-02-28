@@ -11,7 +11,7 @@
                 <form wire:submit.prevent="import" class="form-modal">
                 <div class="form-group">
                     <label for="exampleFormControlFile1">File Excel</label>
-                    <input type="file" class="form-control-file" id="excel" required wire:model="file.excel">
+                    <input type="file" class="form-control-file" id="excel" required wire:model="excel">
                     @if(isset($validation_errors["excel"]))
                                 @foreach($validation_errors["excel"] as $k => $v)
                                 <label for="" class="text-danger">{{ $v }}</label>

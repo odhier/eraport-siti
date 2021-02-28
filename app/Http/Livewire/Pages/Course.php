@@ -36,7 +36,7 @@ class Course extends Component
         "_pilihTahun" => true,
     ];
     public $isUploading = false;
-    public $file = ['excel'=>''];
+    public $excel;
     public $subMenu = "Nilai";
     public $current_ki = 0;
     public $course_code;
@@ -84,17 +84,6 @@ class Course extends Component
     }
 
     public function import(){
-
-
-        $validator = Validator::make($this->file,[
-            'excel' => 'required|mimes:xls,xlsx'
-        ],[
-            'excel.required' => 'File tidak boleh kosong',
-            'excel.mimes' => 'Fomat file tidak sesuai'
-        ]);
-
-        if($validator->fails()) return $this->validation_errors=$validator->errors()->toArray();
-
         $this->isUploading=true;
         try{
         $array = Excel::toArray(new NilaiImport, $this->file['excel']);
