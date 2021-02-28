@@ -49,7 +49,7 @@ class NilaiExport implements FromView, ShouldAutoSize, WithCalculatedFormulas,Wi
                 'nilai.student_class_id',
                 'nilai.NH',
                 'nilai.NUTS',
-                'nilai.NUAS',
+                'nilai.NUAS'
             )->where('course_id', $this->course_id)
             ->where('tahun_ajaran_id', $this->tahun_id)
             ->where('ki', $this->ki)
