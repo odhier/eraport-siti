@@ -10,23 +10,32 @@ use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\NumberColumn;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\NilaiLengkapExport;
+use App\Models\Semester;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CourseTable extends LivewireDatatable
 {
-    protected $listeners = ['setId', 'successMessage', 'errorMessage', 'editForm'];
+    protected $listeners = ['setId', 'successMessage', 'errorMessage', 'editForm', 'uploadFileImport', 'uploadFileImport'];
     public $model = TeacherCourse::class;
     public $data;
     public $kode;
     public $class;
     public $tahun;
+    public $course;
     public $course_id;
+    public $excel;
+    public $isUploading = false;
 
     public $select_semester = true;
+    public $export = true;
+    public $import = true;
     public $selected_semester;
 
 
     public function builder()
     {
+
         return ($this->class && $this->tahun) ? $this->studentClassBuilder() : $this->classBuilder();
     }
     public function columns()
@@ -41,14 +50,20 @@ class CourseTable extends LivewireDatatable
     {
         session()->flash('message', $msg);
     }
-
     public function setId($kode = null)
     {
         $this->data = $kode;
     }
+    public function exportSITI()
+    {
+        return Excel::download(new NilaiLengkapExport($this->course->course->id,$this->class->id, $this->tahun->id, $this->selected_semester), $this->course->course->kode.'_'.$this->class->name.'_'.str_replace('/','-',$this->tahun->tahun_ajaran).'_'.Semester::SEMESTER[$this->selected_semester].'.xlsx');
+    }
+    public function uploadFileImport(){
+        $this->isUploading = true;
+    }
     private function classTable()
     {
-
+        // dd($this->course);
         return [
             NumberColumn::name('teacher_course.id')
                 ->label('ID')

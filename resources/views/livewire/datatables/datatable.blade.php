@@ -62,9 +62,34 @@
                 </div>
                 @endif
                 @endisset
+                @if(isset($export) && $export && isset($class))
+                <div>
+                    <div x-data="{ init() {
+                        window.livewire.on('/courses/export/{{$course->course->id}}_{{$class->id}}_{{$tahun->id}}_{{$selected_semester}}/', link => window.open(link, '_self'))
+                    } }" x-init="init">
+                    <button wire:click="exportSITI" class="flex items-center space-x-2 px-3 border border-green-400 rounded-md bg-white text-green-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none"><span>Export</span>
+                        <x-icons.excel class="m-2" /></button>
+                    </div>
+                </div>
+
+                <div>
+
+                    <button data-toggle="modal" data-target="#importModal" class="flex items-center space-x-2 px-3 border border-blue-400 rounded-md bg-white text-blue-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-blue-200 focus:outline-none"><span>Import</span>
+                        <svg class="m-2 h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                          </svg>
+                        </button>
+                </div>
+                @endif
                 @if($exportable)
                 <div x-data="{ init() {
-                    window.livewire.on('startDownload', link => window.open(link,'_blank'))
+                    window.livewire.on('startDownload', link => window.open(link, '_self'))
+                } }" x-init="init">
+                    <button wire:click="export" class="flex items-center space-x-2 px-3 border border-green-400 rounded-md bg-white text-green-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none"><span>Export</span>
+                        <x-icons.excel class="m-2" /></button>
+                </div>
+                <div x-data="{ init() {
+                    window.livewire.on('startDownload', link => window.open(link, '_self'))
                 } }" x-init="init">
                     <button wire:click="export" class="flex items-center space-x-2 px-3 border border-green-400 rounded-md bg-white text-green-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none"><span>Export</span>
                         <x-icons.excel class="m-2" /></button>

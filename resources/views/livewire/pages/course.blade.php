@@ -16,16 +16,35 @@
             <h2>{{strtoupper($course['course']['name'])}}</h2>
             {{$class_name}}
             {{($tahun)?$tahun->tahun_ajaran:""}}
-            @livewire('course-table', ['kode' => $course['course']['kode'],'class' => $class, 'tahun' => $tahun, 'selected_semester' => $selected_semester])
+            @livewire('course-table', ['kode' => $course['course']['kode'],'class' => $class, 'tahun' => $tahun, 'selected_semester' => $selected_semester, 'course'=>$course])
 
+            @include("livewire.partials.modals.admin.import-nilai")
             @include("livewire.partials.modals.admin.edit-nilai")
 
             @endif
+
         </div>
+
         <footer class="w-100 position-relative row">
             <livewire:partials.footer>
         </footer>
     </div>
+
+    @push('scripts-bottom')
+    <script>
+        document.addEventListener('DOMContentLoaded', function(event) {
+
+        $("#excel").change(function(){
+            $("#submitImport").click();
+            // Livewire.emit('uploadFileImport')
+        })
+        Livewire.on('uploadFileImport', () => {
+            // $("#loadingStatement").show()
+
+})
+        });
+    </script>
+    @endpush
 </div>
 
 

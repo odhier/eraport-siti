@@ -25,9 +25,14 @@ Auth::routes([
 
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::get('users/export/', ['uses' => 'App\Http\Livewire\Pages\Admin@export']);
+    Route::get('courses/export/{kode?}_{class_id?}_{tahun_id?}_{semester?}', ['uses' => 'App\Http\Livewire\Pages\Course@export']);
+    Route::get('courses/export/{kode?}_{class_id?}_{tahun_id?}_{semester?}/view', ['uses' => 'App\Http\Controllers\HomeController@view']);
     //dashboard
     Route::get('/', App\Http\Livewire\Pages\Dashboard::class)->name('dashboard');
     //course
+
+    Route::post('/courses/import', ['uses' => 'App\Http\Livewire\CourseTable@uploadFileImport'])->name('importNilai');
     Route::get('/courses/{kode?}/{class_id?}/{tahun_name?}', App\Http\Livewire\Pages\Course::class)->name('courses');
     Route::get('/class/{tahun_id?}/{class_id?}', App\Http\Livewire\Pages\Classes::class)->name('class');
     Route::get('/class/{tahun_id?}/{class_id?}/{semester?}/{student_class_id?}', App\Http\Livewire\Pages\DetailNilai::class)->name('class-student');

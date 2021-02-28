@@ -15,10 +15,18 @@ use App\Models\Semester;
 use App\Models\StudentClass;
 use App\Models\TahunAjaran;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\NilaiLengkapExport;
+use App\Imports\NilaiImport;
+use App\Models\Course as ModelsCourse;
+use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Request;
+use Livewire\WithFileUploads;
 
 
 class Course extends Component
 {
+    use WithFileUploads;
     protected $listeners = ['changeTahun', 'rerenderSidebar' => '$refresh', 'editForm'];
     public $menu = [
         "_page" => 'Course',
@@ -27,6 +35,8 @@ class Course extends Component
         ],
         "_pilihTahun" => true,
     ];
+    public $isUploading = false;
+    public $file = ['excel'=>''];
     public $subMenu = "Nilai";
     public $current_ki = 0;
     public $course_code;
@@ -63,6 +73,56 @@ class Course extends Component
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
+    }
+
+    public function export(Request $request)
+    {
+        $course = ModelsCourse::findOrFail($request->kode);
+        $class = Classes::findOrFail($request->class_id);
+        $tahun = TahunAjaran::findOrFail($request->tahun_id);
+        return Excel::download(new NilaiLengkapExport($request->kode, $request->class_id, $request->tahun_id, $request->semester), $course->kode.'_'.$class->name.'_'.str_replace('/','-',$tahun->tahun_ajaran).'_'.Semester::SEMESTER[$request->semester].'.xlsx');
+    }
+
+    public function import(){
+
+
+        $validator = Validator::make($this->file,[
+            'excel' => 'required|mimes:xls,xlsx'
+        ],[
+            'excel.required' => 'File tidak boleh kosong',
+            'excel.mimes' => 'Fomat file tidak sesuai'
+        ]);
+
+        if($validator->fails()) return $this->validation_errors=$validator->errors()->toArray();
+
+        $this->isUploading=true;
+        try{
+        $array = Excel::toArray(new NilaiImport, $this->file['excel']);
+        $sc_id=0;
+        $row = 1;
+        $ii = 0;
+        //input KI3
+        foreach($array as $index => $nilaiKI){
+
+            for($i=1;$i<count($nilaiKI);$i++){
+                $row = $i;
+                $ii = $index;
+                $sc_id = $nilaiKI[$i][1]?$nilaiKI[$i][1]:$sc_id;
+                Nilai::updateOrCreate(
+                    ['student_class_id' => $sc_id, 'kd_id'=>$nilaiKI[$i][3], 'semester'=> $this->selected_semester],
+                    ['teacher_id'=> Auth::user()->id, 'NH' => $nilaiKI[$i][5], 'NUTS' => $nilaiKI[$i][6], 'NUAS' => $nilaiKI[$i][7]]
+                );
+            }
+        }
+        $this->validation_errors = [];
+        $this->dispatchBrowserEvent('closeModal');
+        $this->emitTo('course-table', 'successMessage', 'Berhasil import data');
+    }catch(\Exception $e){
+        $this->dispatchBrowserEvent('closeModal');
+        $this->emitTo('course-table', 'errorMessage', 'Gagal import data, Pastikan file excel adalah hasil export');
+    }
+
+    $this->isUploading=false;
     }
     public function mount($kode = null)
     {

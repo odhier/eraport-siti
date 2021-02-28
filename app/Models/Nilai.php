@@ -10,6 +10,7 @@ class Nilai extends Model
     use HasFactory;
 
     protected $table = 'nilai';
+    protected $fillable = ['student_class_id', 'semester', 'kd_id', 'teacher_id', 'NH', 'NUTS', 'NUAS', 'created_at', 'updated_at'];
     public function kd()
     {
         return $this->belongsTo(KompetensiDasar::class, 'kd_id', 'id');
