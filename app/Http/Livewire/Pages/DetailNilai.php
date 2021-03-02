@@ -42,17 +42,23 @@ class DetailNilai extends Component
         $nilaiKi = KompetensiInti::with('ki_detail')->get();
         foreach ($nilaiKi as $nilai) {
             $nilai->nilai_lengkap = true;
-            $k = [];
-            foreach ($nilai->ki_detail as $detail) {
-                $n = NilaiKI::select('value')->where('student_class_id', $student_class_id)->where('ki_detail_id', $detail->id)->first();
-                $nilai->nilai_lengkap = (!$n || $n->value == 0) ? false : $nilai->nilai_lengkap;
-                $detail->value = ($n) ? $n->value : 0;
-                $k[] = $detail->kompetensi;
-            }
+            // $k = [];
+            // foreach ($nilai->ki_detail as $detail) {
+            //     $n = NilaiKI::select('value')->where('student_class_id', $student_class_id)->where('ki_detail_id', $detail->id)->first();
+            //     $nilai->nilai_lengkap = (!$n || $n->value == 0) ? false : $nilai->nilai_lengkap;
+            //     $detail->value = ($n) ? $n->value : 0;
+            //     $k[] = $detail->kompetensi;
+            // }
             $nilai->nilai_akhir = round($nilai->ki_detail->avg('value'));
+            $nilai->terendah = $nilai->ki_detail->where('value', $nilai->ki_detail->min('value'))->last();
+            $nilai->tertinggi = $nilai->ki_detail->where('value', $nilai->ki_detail->min('value'))->last();
+
             $nilai->message = "Ananda {$this->student_class->student->name} ";
-            $nilai->message .= ($nilai->nilai_akhir == 4) ? "sangat baik" : (($nilai->nilai_akhir == 4) ? "sudah baik" : (($nilai->nilai_akhir == 4) ? "cukup baik" : "perlu bimbingan"));
-            $nilai->message .= " dalam " . implode(", ", $k) . ".";
+            $nilai->message .= ($nilai->tertinggi->value == 4) ? "sangat baik" : (($nilai->tertinggi->value == 3 ? "sudah baik" : (($nilai->tertinggi->value == 2) ? "cukup baik" : "perlu bimbingan")));
+            $nilai->message .= " dalam " . $nilai->tertinggi->kompetensi. ", dan ";
+
+            $nilai->message .= ($nilai->terendah->value == 4) ? "sangat baik" : (($nilai->terendah->value == 3 ? "sudah baik" : (($nilai->terendah->value == 2) ? "cukup baik" : "perlu bimbingan")));
+            $nilai->message .= " dalam " . $nilai->terendah->kompetensi;
         }
         $this->nilaiKi = $nilaiKi;
         $kds = $this->getKD($this->student_class->classes->tingkat, $this->student_class->tahun_ajaran->id, $semester)->groupBy('course_id');
