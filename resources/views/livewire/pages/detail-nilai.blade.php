@@ -88,9 +88,9 @@
                     <tr data-toggle="collapse" data-target="#demo{{$index+1}}" class="accordion-toggle cursor-pointer">
                         <td>{{$index+1}}</td>
                         <td>{{$kd['course']['name']}}</td>
-                        <td>{{$kd['nilai_akhir_3']}}</td>
+                        <td>{{round($kd['nilai_akhir_3'])}}</td>
                         <td class="text-success">{{$kd['predikat_3']}}</td>
-                        <td>{{$kd['nilai_akhir_4']}}</td>
+                        <td>{{round($kd['nilai_akhir_4'])}}</td>
                         <td class="text-success">{{$kd['predikat_4']}}</td>
                     </tr>
                     <tr>

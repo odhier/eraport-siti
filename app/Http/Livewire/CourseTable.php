@@ -87,7 +87,9 @@ class CourseTable extends LivewireDatatable
             NumberColumn::name('student_class.id')
                 ->label('ID')
                 ->sortBy('student_class.id'),
-
+            Column::callback('id', function ($id){
+                return "<a href='/courses/detail/{$this->course->course->id}_{$this->class->id}_{$this->tahun->id}_{$this->selected_semester}_{$id}'>Detail Nilai</a>";
+            })->label('Detail NIlai'),
             Column::name('students.name')->label('Siswa')->searchable(),
             Column::callback(['id'], function ($id) {
                 return "

@@ -24,10 +24,9 @@ Auth::routes([
 ]);
 
 Route::group(['middleware' => 'auth'], function () {
-
-    Route::get('users/export/', ['uses' => 'App\Http\Livewire\Pages\Admin@export']);
-    Route::get('courses/export/{kode?}_{class_id?}_{tahun_id?}_{semester?}', ['uses' => 'App\Http\Livewire\Pages\Course@export']);
-    Route::get('courses/export/{kode?}_{class_id?}_{tahun_id?}_{semester?}/view', ['uses' => 'App\Http\Controllers\HomeController@view']);
+    Route::get('/courses/export/{kode?}_{class_id?}_{tahun_id?}_{semester?}', ['uses' => 'App\Http\Livewire\Pages\Course@export']);
+    Route::get('/courses/export/{kode?}_{class_id?}_{tahun_id?}_{semester?}/view', ['uses' => 'App\Http\Controllers\HomeController@view']);
+    Route::get('/courses/detail/{course_id?}_{class_id?}_{tahun_id?}_{semester?}_{student_class_id?}', App\Http\Livewire\Pages\DetailNilaiCourse::class)->name('course-detail');
     //dashboard
     Route::get('/', App\Http\Livewire\Pages\Dashboard::class)->name('dashboard');
     //course
