@@ -28,7 +28,7 @@ class CourseTable extends LivewireDatatable
     public $isUploading = false;
 
     public $select_semester = true;
-    public $export = true;
+    public $export;
     public $import = true;
     public $selected_semester;
 
@@ -83,6 +83,7 @@ class CourseTable extends LivewireDatatable
     }
     private function studentClassTable()
     {
+        $this->export = "/courses/export/".$this->course->course->id."_".$this->class->id."_".$this->tahun->id."_".$this->selected_semester."/";
         return [
             NumberColumn::name('student_class.id')
                 ->label('ID')

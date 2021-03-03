@@ -53,28 +53,39 @@
 
             <div class="flex items-center space-x-1">
                 <x-icons.cog wire:loading class="h-9 w-9 animate-spin text-gray-400" />
+                @isset($appointClass)
+                @if($appointClass)
+                <div>
+                    <button wire:click="appointClass" class="flex items-center space-x-2 px-3 border border-blue-400 rounded-md bg-white text-blue-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-blue-200 focus:outline-none"><span class="sm:hidden md:block">Pilih Kelas</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="m-2 h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                          </svg>
+                        </button>
+                </div>
+                @endif
+                @endisset
                 @isset($addable)
 
                 @if($addable)
                 <div>
-                    <button data-toggle="modal" data-target="#createModal" class="flex items-center space-x-2 px-3 border border-green-400 rounded-md bg-white text-green-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none"><span>Add New</span>
+                    <button data-toggle="modal" data-target="#createModal" class="flex items-center space-x-2 px-3 border border-green-400 rounded-md bg-white text-green-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none"><span  class="sm:hidden md:block">Add</span>
                         @include('livewire.datatables.icons.add')</button>
                 </div>
                 @endif
                 @endisset
+
                 @if(isset($export) && $export && isset($class))
                 <div>
                     <div x-data="{ init() {
-                        window.livewire.on('/courses/export/{{$course->course->id}}_{{$class->id}}_{{$tahun->id}}_{{$selected_semester}}/', link => window.open(link, '_self'))
+                        window.livewire.on({{$export}}, link => window.open(link, '_self'))
                     } }" x-init="init">
-                    <button wire:click="exportSITI" class="flex items-center space-x-2 px-3 border border-green-400 rounded-md bg-white text-green-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none"><span>Export</span>
+                    <button wire:click="exportSITI" class="flex items-center space-x-2 px-3 border border-green-400 rounded-md bg-white text-green-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none"><span class="sm:hidden md:block">Export</span>
                         <x-icons.excel class="m-2" /></button>
                     </div>
                 </div>
-
                 <div>
 
-                    <button data-toggle="modal" data-target="#importModal" class="flex items-center space-x-2 px-3 border border-blue-400 rounded-md bg-white text-blue-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-blue-200 focus:outline-none"><span>Import</span>
+                    <button data-toggle="modal" data-target="#importModal" class="flex items-center space-x-2 px-3 border border-blue-400 rounded-md bg-white text-blue-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-blue-200 focus:outline-none"><span class="sm:hidden md:block">Import</span>
                         <svg class="m-2 h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                           </svg>
@@ -85,13 +96,7 @@
                 <div x-data="{ init() {
                     window.livewire.on('startDownload', link => window.open(link, '_self'))
                 } }" x-init="init">
-                    <button wire:click="export" class="flex items-center space-x-2 px-3 border border-green-400 rounded-md bg-white text-green-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none"><span>Export</span>
-                        <x-icons.excel class="m-2" /></button>
-                </div>
-                <div x-data="{ init() {
-                    window.livewire.on('startDownload', link => window.open(link, '_self'))
-                } }" x-init="init">
-                    <button wire:click="export" class="flex items-center space-x-2 px-3 border border-green-400 rounded-md bg-white text-green-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none"><span>Export</span>
+                    <button wire:click="export" class="flex items-center space-x-2 px-3 border border-green-400 rounded-md bg-white text-green-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none"><span class="sm:hidden md:block">Export</span>
                         <x-icons.excel class="m-2" /></button>
                 </div>
                 @endif

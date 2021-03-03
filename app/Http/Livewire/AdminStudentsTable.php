@@ -9,6 +9,9 @@ use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\NumberColumn;
 use Mediconesystems\LivewireDatatables\BooleanColumn;
 
+use App\Exports\StudentsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class AdminStudentsTable extends LivewireDatatable
 {
@@ -18,6 +21,10 @@ class AdminStudentsTable extends LivewireDatatable
 
     public $addable = true;
     public $_id;
+    public $appointClass = true;
+    //untuk menampilkan button export
+    public $class = "";
+    public $export;
 
     private function getData($id)
     {
@@ -37,7 +44,9 @@ class AdminStudentsTable extends LivewireDatatable
     }
     public function columns()
     {
+        $this->export = "/admin/students/export";
         return [
+            Column::checkbox()->label('Select'),
             NumberColumn::name('id')
                 ->label('ID')
                 ->sortBy('id'),
@@ -68,6 +77,13 @@ class AdminStudentsTable extends LivewireDatatable
             })->label('Actions')
         ];
     }
+    public function appointClass(){
+        dd($this->selected);
+    }
+    public function exportSITI()
+    {
+        return Excel::download(new StudentsExport(), 'Students_template_import.xlsx');
+    }
 
     public function confirmDelete($id)
     {
@@ -87,6 +103,7 @@ class AdminStudentsTable extends LivewireDatatable
     }
     public function editForm($id)
     {
+
         $this->emitUp('handleUpdateForm', $this->getData($id));
     }
     public function viewForm($id)

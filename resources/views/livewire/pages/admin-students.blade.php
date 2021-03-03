@@ -8,7 +8,8 @@
         <div class="container">
         <h2>{{$subMenu}}</h2>
 
-            <livewire:admin-students-table searchable="name, nisn, nis" hideable="select" editable deletable />
+            <livewire:admin-students-table searchable="name, nisn, nis" editable deletable />
+            @include("livewire.partials.modals.admin.import-students")
             @include('livewire.partials.modals.admin.create-student')
             @include("livewire.partials.modals.admin.edit-student")
             @include("livewire.partials.modals.admin.view-student")

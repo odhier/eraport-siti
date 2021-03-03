@@ -6,12 +6,18 @@ use App\Models\Student;
 use App\Models\Navs\NavAdmin;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\WithFileUploads;
+use App\Imports\StudentsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminStudents extends Component
 {
+    use WithFileUploads;
     protected $listeners = ['handleUpdateForm', 'handleViewForm'];
 
     public $model = Student::class;
+    public $isUploading = false;
+    public $excel;
     public $currentID;
     public $inputMore;
     public $menu;
@@ -102,6 +108,36 @@ class AdminStudents extends Component
             }
             return $this->validation_errors = [];
         }
+    }
+    public function import(){
+        $this->isUploading=true;
+        try{
+        $array = Excel::toArray(new StudentsImport, $this->excel);
+        $data = array();
+        for($i = 1;$i < count($array[0]); $i++){
+            if($array[0][$i][0] && $array[0][$i][0] != ""){
+            $data[] = [
+                'name' => $array[0][$i][0],
+                'nisn' => $array[0][$i][1],
+                'nis' => $array[0][$i][2],
+                'parent_name' => $array[0][$i][3],
+                'created_at' => \Carbon\Carbon::now()
+            ];
+        }
+        }
+        Student::insert($data);
+
+
+        $this->validation_errors = [];
+        $this->dispatchBrowserEvent('closeModal');
+        $this->emitTo('admin-students-table', 'successMessage', 'Berhasil import data');
+    }catch(\Exception $e){
+        dd($e);
+        $this->dispatchBrowserEvent('closeModal');
+        $this->emitTo('admin-students-table', 'errorMessage', 'Gagal import data, Pastikan file excel adalah hasil export');
+    }
+
+    $this->isUploading=false;
     }
     public function handleUpdateForm($student)
     {
