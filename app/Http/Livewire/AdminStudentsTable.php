@@ -10,12 +10,13 @@ use Mediconesystems\LivewireDatatables\NumberColumn;
 use Mediconesystems\LivewireDatatables\BooleanColumn;
 
 use App\Exports\StudentsExport;
+use App\Models\StudentClass;
 use Maatwebsite\Excel\Facades\Excel;
 
 
 class AdminStudentsTable extends LivewireDatatable
 {
-    protected $listeners = ['confirmDelete', '_delete', 'successMessage', 'errorMessage', 'editForm', 'viewForm'];
+    protected $listeners = ['confirmDelete', '_delete', 'successMessage', 'errorMessage', 'editForm', 'viewForm', 'appoint'];
 
     public $model = Student::class;
 
@@ -77,9 +78,25 @@ class AdminStudentsTable extends LivewireDatatable
             })->label('Actions')
         ];
     }
-    public function appointClass(){
-        dd($this->selected);
+    public function appoint($class_id, $tahun_ajaran_id){
+        $i = 0;
+        try{
+        foreach($this->selected as $selectedStudent){
+            StudentClass::firstOrCreate([
+                'student_id' => $selectedStudent,
+                'class_id' => $class_id,
+                'tahun_ajaran_id'=> $tahun_ajaran_id
+            ],[
+                'created_at' => \Carbon\Carbon::now()
+            ]);
+        }
+        $this->emitTo('pages.admin-students','successAppoint');
+        return $this->successMessage("Berhasil memasukkan siswa ke kelas");
+    }catch(\Exception $e){
+        return $this->errorMessage("Gagal memasukkan siswa ke kelas");
     }
+    }
+
     public function exportSITI()
     {
         return Excel::download(new StudentsExport(), 'Students_template_import.xlsx');

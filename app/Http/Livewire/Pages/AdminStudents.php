@@ -8,13 +8,15 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
 use Livewire\WithFileUploads;
 use App\Imports\StudentsImport;
+use App\Models\TahunAjaran;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AdminStudents extends Component
 {
     use WithFileUploads;
-    protected $listeners = ['handleUpdateForm', 'handleViewForm'];
+    protected $listeners = ['handleUpdateForm', 'handleViewForm', 'setClass', 'successAppoint'];
 
+    public $savingAppoint=false;
     public $model = Student::class;
     public $isUploading = false;
     public $excel;
@@ -22,6 +24,11 @@ class AdminStudents extends Component
     public $inputMore;
     public $menu;
     public $validation_errors = [];
+    public $allTahun;
+    public $SClass = [
+        "class_id" => "",
+        "tahun_ajaran_id" => "",
+    ];
     public $student = [
         "id" => 0,
         "name" => "",
@@ -33,6 +40,7 @@ class AdminStudents extends Component
     public function mount()
     {
         $this->menu = NavAdmin::getMenu();
+        $this->allTahun = TahunAjaran::orderBy('id', 'desc')->get();
     }
     public function render()
     {
@@ -109,6 +117,14 @@ class AdminStudents extends Component
             return $this->validation_errors = [];
         }
     }
+    public function setClass($class)
+    {
+
+        if ($class != null)
+            $this->SClass['class_id'] = $class['id'];
+        else
+            $this->SClass['class_id'] = "";
+    }
     public function import(){
         $this->isUploading=true;
         try{
@@ -139,6 +155,10 @@ class AdminStudents extends Component
 
     $this->isUploading=false;
     }
+    public function successAppoint(){
+        $this->savingAppoint = false;
+        $this->dispatchBrowserEvent('closeModal');
+    }
     public function handleUpdateForm($student)
     {
         $this->currentID = $student['id'];
@@ -158,5 +178,7 @@ class AdminStudents extends Component
             "nisn" => "",
             "nis" => "",
         ];
+
+        $this->emitTo('partials.class-search-bar', '_reset');
     }
 }

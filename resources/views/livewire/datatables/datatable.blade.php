@@ -56,7 +56,7 @@
                 @isset($appointClass)
                 @if($appointClass)
                 <div>
-                    <button wire:click="appointClass" class="flex items-center space-x-2 px-3 border border-blue-400 rounded-md bg-white text-blue-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-blue-200 focus:outline-none"><span class="sm:hidden md:block">Pilih Kelas</span>
+                    <button {{count($selected) == 0?'disabled':''}} data-toggle="modal" data-target="#appointModal" class="{{count($selected) == 0?'disabled opacity-50 cursor-not-allowed ':''}}flex items-center space-x-2 px-3 border border-blue-400 rounded-md bg-white text-blue-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-blue-200 focus:outline-none"><span class="sm:hidden md:block">Pilih Kelas</span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="m-2 h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                           </svg>
