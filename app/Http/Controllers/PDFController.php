@@ -23,6 +23,7 @@ class PDFController extends Controller
     public $courses;
     public $nilaiKi;
     public $kds;
+
     public function download($tahun_id, $class_id, $semester, $student_class_id)
     {
         $this->tahun_id = $tahun_id;
