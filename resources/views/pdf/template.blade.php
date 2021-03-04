@@ -471,8 +471,8 @@ $bulan = array (
             </td>
         </tr>
         <tr>
-            <td class="text-center" style="width: 100%;">
-                <div class="ttd d-flex flex-column" style="margin-left: auto;width:250px;">
+            <td class="text-center" style="width: 100%;" colspan="2">
+                <div class="ttd d-flex flex-column" style="width:700px;text-align:center;">
                 <ul>
                     <li>Kepala Sekolah,</li>
                     <li style="height: 65px;background: url('{{public_path('images/paraf_kepsek.png')}}'); width:100%;border-radius: 5px;
@@ -484,7 +484,7 @@ $bulan = array (
                 </ul>
                 <div style="background: url('{{public_path('images/cap_sitikhtiar.png')}}'); background-position: left bottom;
                 background-repeat: no-repeat;
-                background-size: contain;width:100%;height:90px;position:relative; left:-30px;top:30px"></div>
+                background-size: contain;width:100%;height:90px;position:relative; left:200px;top:30px"></div>
                 </div>
             </td>
         </tr>
