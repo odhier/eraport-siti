@@ -71,7 +71,7 @@
                         <th rowspan="2" class="align-middle">Mata Pelajaran</th>
                         <th colspan="2" class="align-middle text-center">Pengetahuan</th>
 
-                        <th colspan="2" class="align-middle text-center">Pengetahuan</th>
+                        <th colspan="2" class="align-middle text-center">Keterampilan</th>
 
                     </tr>
                     <tr>
