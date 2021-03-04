@@ -63,6 +63,22 @@
                 </div>
 
                 <hr>
+
+                @if($loadingKD)
+                <h5 class="animate-bounce">Loading Data...</h5>
+                <div class="animate-pulse flex space-x-4">
+                    <div class="flex-1 space-y-4 py-1">
+                        <div class="space-x-2 flex">
+                          <div class="h-4 bg-gray-400 rounded w-1/6"></div>
+                          <div class="h-4 bg-gray-400 rounded w-5/6"></div>
+                        </div>
+                        <div class="space-x-2 flex">
+                            <div class="h-4 bg-gray-400 rounded w-1/6"></div>
+                            <div class="h-4 bg-gray-400 rounded w-5/6"></div>
+                          </div>
+                      </div>
+                  </div>
+                @else
                 <div class="form-group row">
                     <label for="inputKd" class="col-12 col-form-label">Kompetensi Dasar</label>
                     <div class="col-12">
@@ -85,6 +101,7 @@
                         @endforeach
                     </div>
                 </div>
+                @endif
                 <div class=" w-100">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 d-flex align-items-center">

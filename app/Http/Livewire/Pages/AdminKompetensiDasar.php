@@ -16,6 +16,7 @@ class AdminKompetensiDasar extends Component
 {
     protected $listeners = ['editForm'];
     private $model = KompetensiDasar::class;
+    public $loadingKD = false;
     public $subMenu = "Kompetensi Dasar & KKM";
     public $menu;
     public $inputMore;
@@ -66,6 +67,7 @@ class AdminKompetensiDasar extends Component
     }
     public function editForm($ki, $id)
     {
+        $this->loadingKD = true;
         $this->deleteLists = [];
         $this->current_ki = $ki;
         $this->course = Course::find($id);
@@ -77,6 +79,7 @@ class AdminKompetensiDasar extends Component
         }
         $kkm = $this->getKKM($this->data['tingkat_kelas'], $this->data['tahun_ajaran_id']);
         $this->data['kkm'] = ($kkm) ? $kkm->toArray() : ['value' => ''];
+        $this->loadingKD = false;
     }
     public function addKD()
     {
@@ -167,6 +170,7 @@ class AdminKompetensiDasar extends Component
             return $query->where('tingkat_kelas', $tingkat);
         })->where('tahun_ajaran_id', (!empty($tahun)) ? $tahun : 0)
             ->where('ki', $this->current_ki)->get();
+
     }
     public function getKKM($tingkat = null, $tahun = null)
     {
@@ -178,6 +182,7 @@ class AdminKompetensiDasar extends Component
 
     public function changeParam()
     {
+        $this->loadingKD = true;
         $kkm = $this->getKKM($this->data['tingkat_kelas'], $this->data['tahun_ajaran_id']);
         $this->data['kkm'] = ($kkm) ? $kkm->toArray() : ['value' => ''];
         $kds = $this->getKD($this->data['tingkat_kelas'], $this->data['tahun_ajaran_id']);
@@ -187,6 +192,7 @@ class AdminKompetensiDasar extends Component
             $this->kds[] = ['id' => $kd->id, 'value' => $kd->value];
         }
         $this->deleteLists = [];
+        $this->loadingKD = false;
     }
     public function updated($propertyName)
     {
