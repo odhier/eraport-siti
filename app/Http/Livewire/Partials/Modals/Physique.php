@@ -13,7 +13,7 @@ class Physique extends Component
         $this->angka++;
     }
     public function loadForm($id){
-        $this->emit('togglePhysiqueFormModal');
+        // $this->emit('togglePhysiqueFormModal');
     }
     public function render()
     {

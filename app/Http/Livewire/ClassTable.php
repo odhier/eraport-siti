@@ -57,7 +57,7 @@ class ClassTable extends LivewireDatatable
             })->label('Detail')->alignCenter(),
             Column::name('students.name')->label('Siswa')->searchable()->filterable(),
             NumberColumn::callback('student_class.id, student_class.student_id', function ($id) {
-                return "<a wire:click.prevent=\$emitTo('partials.modals.physique','open','{$id}') class='text-teal-500 hover:text-teal-600 cursor-pointer')>Fisik</a>";
+                return "<a data-toggle='modal' data-target='#physique-modal' wire:click.prevent=\$emitTo('partials.modals.physique','open','{$id}') class='text-teal-500 hover:text-teal-600 cursor-pointer')>Fisik</a>";
             })->label('Fisik')->alignCenter(),
             Column::callback('student_class.student_id,student_class.id', function ($student_id, $id) {
                 $saran = Saran::where('student_class_id', $id)->where('semester', $this->selected_semester)->first();
