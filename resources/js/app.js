@@ -14,6 +14,9 @@ document.addEventListener('turbolinks:load', () => {
     window.livewire.rescan()
 })
 
+window.livewire.on('togglePhysiqueFormModal', function(){
+    $('#physique-modal').modal('toggle')
+});
 
 // $(".form-modal").addEventListener("keyup", function (event) {
 //     if (event.keyCode === 13) {
