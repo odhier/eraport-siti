@@ -20,9 +20,13 @@ class Physique extends Component
     protected $rules = [
         'tinggi' => 'numeric',
         'berat' => 'numeric',
+        'pendengaran' => 'in:"Baik","Tidak Baik",""',
+        'penglihatan' => 'in:"Baik","Tidak Baik",""',
+        'gigi' => 'in:"Bersih","Tidak Bersih",""',
     ];
     protected $messages = [
         "*.numeric" => "Hanya boleh angka",
+        "*.in" => "Value tidak valid"
     ];
 
     public function increment(){
@@ -54,7 +58,13 @@ class Physique extends Component
             try{
                 physiqueModel::updateOrCreate(
                     ['student_class_id' => $this->physique['student_class_id'], 'semester' => $this->semester['id']],
-                    ['tinggi' => $this->physique['tinggi'], 'berat' => $this->physique['berat']]
+                    [
+                        'tinggi' => $this->physique['tinggi'],
+                        'berat' => $this->physique['berat'],
+                        'pendengaran'=> $this->physique['pendengaran'],
+                        'penglihatan' => $this->physique['penglihatan'],
+                        'gigi' => $this->physique['gigi']
+                    ]
                 );
                 $this->dispatchBrowserEvent('closeModal');
                 $this->emitTo('class-table', 'successMessage', 'Berhasil menyimpan data');

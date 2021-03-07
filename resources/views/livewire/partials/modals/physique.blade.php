@@ -6,9 +6,57 @@
         </div>
             <div class="modal-body">
                 <div x-show="isLoading">
-                    <h5 class="animate-bounce">Loading Data...</h5>
+                    <div class="row">
+                    <div class="col-12 col-md-6 space-y-2">
+                        <div class="row">
+                            <label class="col-sm-4 col-form-label py-0">Siswa</label>
+                            <div class="col-sm-8 col-form-label py-0">
+                                <div class="h-4 bg-gray-400 rounded w-2/6 animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 col-form-label py-0">Semester</label>
+                            <div class="col-sm-8 col-form-label py-0">
+                                <div class="h-4 bg-gray-400 rounded w-5/6 animate-pulse"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                    <hr>
                     <div class="animate-pulse flex space-x-4">
 
+                        <div class="flex-1 space-y-4 py-1">
+                            <div class="space-y-2">
+                                <div class="h-4 bg-gray-400 rounded w-1/6"></div>
+                                <div class="h-4 bg-gray-400 rounded w-5/6"></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flex-1 space-y-4 py-1">
+                            <div class="space-y-2">
+                                <div class="h-4 bg-gray-400 rounded w-1/6"></div>
+                                <div class="h-4 bg-gray-400 rounded w-5/6"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="animate-pulse flex space-x-4">
+
+                        <div class="flex-1 space-y-4 py-1">
+                            <div class="space-y-2">
+                                <div class="h-4 bg-gray-400 rounded w-1/6"></div>
+                                <div class="h-4 bg-gray-400 rounded w-5/6"></div>
+                            </div>
+                        </div>
+                        <div class="flex-1 space-y-4 py-1">
+                            <div class="space-y-2">
+                                <div class="h-4 bg-gray-400 rounded w-1/6"></div>
+                                <div class="h-4 bg-gray-400 rounded w-5/6"></div>
+                            </div>
+                        </div>
                         <div class="flex-1 space-y-4 py-1">
                             <div class="space-y-2">
                                 <div class="h-4 bg-gray-400 rounded w-1/6"></div>
@@ -38,7 +86,7 @@
                     <div class="col-12 space-x-2">
                         <hr>
                         <div class="form-row mb-3">
-                            <input type="hidden" wire:model="absensi.id">
+                        <input type="hidden" wire:model="physique.id">
                         <div class="col-sm-6">
                             <label for="sakit">Tinggi</label>
                             <div class="input-group">
@@ -59,6 +107,58 @@
                             </div>
                             @if(isset($validation_errors["berat"]))
                                 @foreach($validation_errors["berat"] as $k => $v)
+                                <label for="" class="text-danger">{{ $v }}</label>
+                                @endforeach
+                            @endif
+                        </div>
+
+                        </div>
+                    </div>
+                    <div class="col-12 space-x-2">
+                        <hr>
+                        <div class="form-row mb-3">
+                        <input type="hidden" wire:model="physique.id">
+                        <div class="col-sm-4">
+                            <label for="sakit">Pendengaran</label>
+                            <div class="input-group">
+                                <select wire:model.defer="physique.pendengaran" class="form-select p-2 active:outline-none focus:outline-none border border-gray-700 rounded" aria-label="Default select example" id="pendengaran">
+                                    <option selected wire:key="" value="">Pilih kondisi pendengaran</option>
+                                    <option wire:key="Baik" value="Baik">Baik</option>
+                                    <option wire:key="Tidak Baik" value="Tidak Baik">Tidak Baik</option>
+                                  </select>
+                            </div>
+                            @if(isset($validation_errors["pendengaran"]))
+                                @foreach($validation_errors["pendengaran"] as $k => $v)
+                                <label for="" class="text-danger">{{ $v }}</label>
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="izin">Penglihatan</label>
+                            <div class="input-group">
+                                <select wire:model.defer="physique.penglihatan" class="form-select p-2 active:outline-none focus:outline-none border border-gray-700 rounded" aria-label="Default select example" id="penglihatan">
+                                    <option selected wire:key="" value="">Pilih kondisi penglihatan</option>
+                                    <option wire:key="Baik" value="Baik">Baik</option>
+                                    <option wire:key="Tidak Baik" value="Tidak Baik">Tidak Baik</option>
+                                  </select>
+                            </div>
+                            @if(isset($validation_errors["penglihatan"]))
+                                @foreach($validation_errors["penglihatan"] as $k => $v)
+                                <label for="" class="text-danger">{{ $v }}</label>
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="izin">Gigi</label>
+                            <div class="input-group">
+                                <select wire:model.defer="physique.gigi" class="form-select p-2 active:outline-none focus:outline-none border border-gray-700 rounded" aria-label="Default select example" id="gigi">
+                                    <option selected wire:key="" value="">Pilih kondisi gigi</option>
+                                    <option wire:key="Bersih" value="Bersih">Bersih</option>
+                                    <option wire:key="Tidak Bersih" value="Tidak Bersih">Tidak bersih</option>
+                                  </select>
+                            </div>
+                            @if(isset($validation_errors["gigi"]))
+                                @foreach($validation_errors["gigi"] as $k => $v)
                                 <label for="" class="text-danger">{{ $v }}</label>
                                 @endforeach
                             @endif

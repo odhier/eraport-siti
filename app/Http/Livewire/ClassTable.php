@@ -61,7 +61,7 @@ class ClassTable extends LivewireDatatable
                 return ($saran) ? $saran->saran : "";
             })->label('Saran'),
             NumberColumn::callback('student_class.id, student_class.student_id', function ($id) {
-                return "<a data-toggle='modal' data-target='#physique-modal' wire:click.prevent=\$emitTo('partials.modals.physique','open','{$id}','{$this->selected_semester}') class='text-teal-500 hover:text-teal-600 cursor-pointer')>Fisik</a>";
+                return "<a data-toggle='modal' data-target='#physique-modal' wire:click.prevent=\$emitTo('partials.modals.physique','open','{$id}','{$this->selected_semester}') class='text-teal-500 hover:text-teal-600 cursor-pointer')>Fisik & Kondisi Kesehatan</a>";
             })->label('Fisik')->alignCenter(),
 
             Column::callback('student_class.id', function ($id) {

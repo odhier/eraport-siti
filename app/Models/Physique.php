@@ -9,7 +9,7 @@ class Physique extends Model
 {
     use HasFactory;
     protected $table = 'physique';
-    protected $fillable = ['student_class_id', 'semester', 'tinggi', 'berat'];
+    protected $fillable = ['student_class_id', 'semester', 'tinggi', 'berat', 'pendengaran', 'penglihatan', 'gigi'];
     public function student_class()
     {
         return $this->belongsTo(StudentClass::class, 'student_class_id', 'id');
