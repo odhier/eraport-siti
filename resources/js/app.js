@@ -17,6 +17,12 @@ document.addEventListener('turbolinks:load', () => {
 window.livewire.on('togglePhysiqueFormModal', function(){
     $('#physique-modal').modal('toggle')
 });
+window.livewire.on('togglePhysiqueLoading', function(){
+    $('#togglePhysiqueLoading').click();
+});
+window.livewire.on('togglePhysiqueSaving', function(){
+    $('#togglePhysiqueSaving').click();
+});
 
 // $(".form-modal").addEventListener("keyup", function (event) {
 //     if (event.keyCode === 13) {

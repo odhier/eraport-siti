@@ -37,41 +37,7 @@
 
                 </div>
                 <hr>
-                {{-- <div class="form-row mb-3">
-                    <div class="col-sm-4">
-                        <label for="kd-{{$index}}">Absensi</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">{{$kd['ki']['kode']}}.{{$index+1}}</span>
-                            </div>
-                            <textarea class="form-control" aria-label="With textarea" id="kd-{{$index}}" rows="1" class="form-control is-valid" readonly>{{$kd['kompetensi']}}</textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-5 offset-md-1">
 
-                        <label for="kd-{{$index}}">Nilai</label>
-                        <div class="input-group d-flex justify-content-between">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="nilai-{{$index}}" id="kd-{{$index}}-SB" value="4" wire:model="kds.{{$index}}.value">
-                            <label class="form-check-label" for="inlineRadio1">SB</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="nilai-{{$index}}" id="kd-{{$index}}-B" value="3" wire:model="kds.{{$index}}.value">
-                            <label class="form-check-label" for="inlineRadio2">B</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="nilai-{{$index}}" id="kd-{{$index}}-MM" value="2" wire:model="kds.{{$index}}.value">
-                            <label class="form-check-label" for="inlineRadio3">MM</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="nilai-{{$index}}" id="kd-{{$index}}-PB" value="1" wire:model="kds.{{$index}}.value">
-                            <label class="form-check-label" for="inlineRadio3">PB</label>
-                          </div>
-                        </div>
-                        @error('kds.'.$index.'.value') <small class="text-danger">{{ $message }}</small> @enderror
-                    </div>
-
-                </div> --}}
                 <div class="form-row mb-3">
                     <input type="hidden" wire:model="absensi.id">
                 <div class="col-sm-4">

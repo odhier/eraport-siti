@@ -39,6 +39,10 @@ class StudentClass extends Model
     {
         return $this->hasMany(Absensi::class, 'student_class_id', 'id');
     }
+    public function physique()
+    {
+        return $this->hasMany(Physique::class, 'student_class_id', 'id');
+    }
     public function scopeSelectGroupedWeaponNames($query, $alias)
     {
         $query->addSelect([
