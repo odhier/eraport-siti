@@ -170,7 +170,7 @@
                 </div>
                 @endif
 
-                <button id="togglePhysiqueLoading" @click="isLoading = false" class="hidden">-</button>
+                <button class="toggleLoading" @click="isLoading = false" class="hidden"></button>
             </div>
             <div class="modal-footer" x-data="{isSaving: false}">
                 <div class="row d-flex align-items-center">
@@ -186,7 +186,7 @@
                               <span class="sm:hidden md:block">Saving</span>
                         </button>
 
-                        <button id="togglePhysiqueSaving" @click="isSaving = false" class="hidden">-</button>
+                        <button class="toggleSaving" @click="isSaving = false" class="hidden">-</button>
                         <button  x-show="!isSaving" @click="isSaving = true" type="button" class="btn s-btn-primary my-3 btn-modal-save" wire:click="save">Submit</button>
 
 

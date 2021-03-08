@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class Physique extends Component
 {
-    public $isLoading = false;
     public $angka=1;
     public $student_class;
     public $semester;
@@ -28,11 +27,6 @@ class Physique extends Component
         "*.numeric" => "Hanya boleh angka",
         "*.in" => "Value tidak valid"
     ];
-
-    public function increment(){
-        $this->angka++;
-        $this->isLoading=false;
-    }
     public function loadForm($id, $semester){
         $this->validation_errors = [];
         $this->semester= ['id'=>$semester, 'name'=>Semester::SEMESTER[$semester]];
@@ -42,17 +36,17 @@ class Physique extends Component
             'semester' => $semester
         ])->toArray();
 
-        return $this->emit('togglePhysiqueLoading');
+        return $this->emit('toggleLoading');
     }
     public function save(){
         if(!$this->physique || !$this->physique['student_class_id']) {
             $this->dispatchBrowserEvent('closeModal');
-            $this->emit('togglePhysiqueSaving');
+            $this->emit('toggleSaving');
             return $this->emitTo('class-table', 'errorMessage', 'Gagal input Fisik & Kondisi Kesehatan Siswa');
         }
         $validator_object = Validator::make($this->physique, $this->rules, $this->messages);
         if ($validator_object->fails()) {
-            $this->emit('togglePhysiqueSaving');
+            $this->emit('toggleSaving');
             return $this->validation_errors = $validator_object->errors()->toArray();
         } else {
             try{
@@ -69,13 +63,12 @@ class Physique extends Component
                 $this->dispatchBrowserEvent('closeModal');
                 $this->emitTo('class-table', 'successMessage', 'Berhasil menyimpan data');
             }catch(\Exception $e){
-                dd($e);
                 $this->dispatchBrowserEvent('closeModal');
-                $this->emit('togglePhysiqueLoading');
+                $this->emit('toggleSaving');
                 return $this->emitTo('class-table', 'errorMessage', 'Gagal input Fisik & Kondisi Kesehatan Siswa');
             }
 
-            $this->emit('togglePhysiqueSaving');
+            $this->emit('toggleSaving');
             return $this->validation_errors = [];
         }
     }

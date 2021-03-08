@@ -43,6 +43,10 @@ class StudentClass extends Model
     {
         return $this->hasMany(Physique::class, 'student_class_id', 'id');
     }
+    public function ekstrakurikuler()
+    {
+        return $this->hasMany(Ekstrakurikuler::class, 'student_class_id', 'id');
+    }
     public function scopeSelectGroupedWeaponNames($query, $alias)
     {
         $query->addSelect([

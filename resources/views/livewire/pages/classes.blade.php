@@ -33,6 +33,9 @@
             <div class="modal fade" id="physique-modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <livewire:partials.modals.physique>
             </div>
+            <div class="modal fade" id="ekstrakurikuler-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <livewire:partials.modals.ekstrakurikuler>
+            </div>
         </div>
         <footer class="w-100 position-relative row">
             <livewire:partials.footer>

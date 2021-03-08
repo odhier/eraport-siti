@@ -37357,11 +37357,11 @@ document.addEventListener('turbolinks:load', function () {
 window.livewire.on('togglePhysiqueFormModal', function () {
   $('#physique-modal').modal('toggle');
 });
-window.livewire.on('togglePhysiqueLoading', function () {
-  $('#togglePhysiqueLoading').click();
+window.livewire.on('toggleLoading', function () {
+  $('.toggleLoading').click();
 });
-window.livewire.on('togglePhysiqueSaving', function () {
-  $('#togglePhysiqueSaving').click();
+window.livewire.on('toggleSaving', function () {
+  $('.toggleSaving').click();
 }); // $(".form-modal").addEventListener("keyup", function (event) {
 //     if (event.keyCode === 13) {
 //         event.preventDefault();
