@@ -32,10 +32,9 @@ class Ekstrakurikuler extends Component
             'student_class_id' => $this->student_class->id,
             'semester' => $semester
         ])->toArray();
-        if(!count($this->ekstrakurikuler['detail'])){
-            $this->ekstrakurikuler['detail'][] = '';
+        if(!isset($this->ekstrakurikuler['detail']) || !count($this->ekstrakurikuler['detail'])){
+            $this->ekstrakurikuler['detail'][] = ['name'=>'', 'nilai'=>'', 'keterangan'=>''];
         }
-        // dd($this->ekstrakurikuler);
         return $this->emit('toggleLoading');
     }
     public function addDetail()
