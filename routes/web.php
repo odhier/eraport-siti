@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/class/{tahun_id?}/{class_id?}/{semester?}/{student_class_id?}', App\Http\Livewire\Pages\DetailNilai::class)->name('class-student');
 
     Route::get('/raport/cetak_pdf/{tahun_id}_{class_id}_{semester}_{student_class_id}', ['uses' => 'App\Http\Controllers\PDFController@download']);
+    Route::get('/legger/{tahun_id}/{class_id}/{semester}/', ['uses' => 'App\Http\Controllers\PDFController@downloadLegger']);
 
     Route::get('/users/edit/{id}', [App\Http\Livewire\UsersTable::class, "edit"])->name('users.edit');
 

@@ -49,6 +49,15 @@
                 </div>
                 @endif
                 @endisset
+                @isset($legger)
+                @if($legger)
+                <div class="w-96 flex rounded-lg">
+                    <div class="relative flex-grow focus-within:z-10 focus:outline-none">
+                        <a style="box-shadow: none;margin-left:10px;" target="_blank" href="/legger/{{$class->tahun_ajaran_id}}/{{$class->class_id}}/{{($selected_semester)?$selected_semester:"1"}}">Download Legger</a>
+                    </div>
+                </div>
+                @endif
+                @endisset
             </div>
 
             <div class="flex items-center space-x-1">

@@ -19,6 +19,7 @@ class ClassTable extends LivewireDatatable
 {
     protected $listeners = ['successMessage', 'errorMessage', 'editForm', 'editAbsensi'];
     public $select_semester = true;
+    public $legger = true;
     public $selected_semester;
     public $KI;
     public $class;
@@ -29,14 +30,6 @@ class ClassTable extends LivewireDatatable
             $setting_semester = GeneralSetting::select('setting_value')->where('setting_name', 'semester_aktif')->first();
             $this->selected_semester = ($setting_semester) ? $setting_semester->setting_value : 1;
         }
-        // return StudentClass::query()->leftJoin('students', 'students.id', 'student_class.student_id')
-        //     ->leftjoin('absensi', function ($join) {
-        //         $join->on('student_class.id', '=', 'absensi.student_class_id')
-        //             ->where('absensi.semester', $this->selected_semester);
-        //     })
-        //     ->where('class_id', $this->class->class->id)
-        //     ->where('tahun_ajaran_id', $this->class->tahun_ajaran_id);
-
         return StudentClass::query()->leftJoin('absensi', function ($join) {
             $join->on('student_class.id', '=', 'absensi.student_class_id')->where('absensi.semester', '=', 1);
         })
